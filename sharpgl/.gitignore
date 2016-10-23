@@ -1,0 +1,38 @@
+#ignore thumbnails created by windows
+Thumbs.db
+#Ignore files build by Visual Studio
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]in
+[Dd]ebug*/
+*.sbr
+obj/
+[Rr]elease*/
+_ReSharper*/
+*.sdf
+*.opensdf
+
+# We don't want to ignore the main release folder scripts.
+!/release/
+/release/2.1*/
+build/nuspec/SharpGLCore/lib/
+build/nuspec/SharpGLforWinForms/lib/
+build/nuspec/SharpGLforWPF/lib/
+release/2.*
+source/SharpGL/packages/
+
+# Ignores for the extensions.
+extensions/build/SharpGL.2010.vsix
+extensions/build/SharpGL.vsix
+extensions/Seeds/packages
+*.GhostDoc.xml
