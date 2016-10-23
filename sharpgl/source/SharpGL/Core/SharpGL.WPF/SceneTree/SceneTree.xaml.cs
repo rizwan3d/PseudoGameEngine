@@ -22,7 +22,7 @@ namespace SharpGL.WPF.SceneTree
     {
         public SceneTree()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
             if (Apex.Design.DesignTime.IsDesignTime)
             {

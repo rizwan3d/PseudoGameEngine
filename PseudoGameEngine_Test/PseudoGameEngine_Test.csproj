@@ -54,6 +54,14 @@
       <Project>{580e22c6-8734-4c45-b964-93098328280d}</Project>
       <Name>PseudoGameEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SDL2-CS\SDL2.csproj">
+      <Project>{85480198-8711-4355-830E-72FD794AD3F6}</Project>
+      <Name>SDL2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sharpgl\source\SharpGL\Core\SharpGL\SharpGL.csproj">
+      <Project>{5EF45533-E2C7-46F2-B4A3-B8F36CD406E0}</Project>
+      <Name>SharpGL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
