@@ -98,63 +98,52 @@ namespace PseudoGameEngine.graphics
             update();
 
             return true;
-        }
-        // Clear color buffer
-        public void Clear(){ gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT); }
-
-        // Update window with OpenGL rendering
-        public void update() { SDL_GL_SwapWindow(win); }
-
-        //Creat delay of Time
-        public void Delay(uint Time)  
-        {
-            SDL_Delay(Time);
-        }
-
-        public void Quit()
-        {
-            isWindowOpened = false;
-            // Delete our OpengL context
-            SDL_GL_DeleteContext(glContext);
-            //Destroy window
-            SDL_DestroyWindow(win);
-            win = IntPtr.Zero;
-            //Quit SDL subsystems
-            SDL_Quit();
-        }
+        }      
 
         #region Event and Updates
+        // call Funtion on event and without event update
         public void SetUpdate(Func<SDL_EventType,int> EventUpdateFunction,Action Update)
         {
+            // if window is open
             while (isWindowOpened)
             {
                 /* Check for new events */
                 while (SDL_PollEvent(out _event) == 1)
                 {
+                    //if event is related to Window
                     if (_event.type == SDL_EventType.SDL_WINDOWEVENT)
+                        //if Window resized call  resetSize()
                         if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
                             resetSize();
+                    // call give function on new event
                     EventUpdateFunction(_event.type);                   
                 }
+                //call other update function
                 Update();
             }
         }
         public void SetUpdate(Func<SDL_EventType, int> EventUpdateFunction)
         {
+            // if window is open
             while (isWindowOpened)
                 /* Check for new events */
                 while (SDL_PollEvent(out _event) == 1)
                 {
+                    //if event is related to Window
                     if (_event.type == SDL_EventType.SDL_WINDOWEVENT)
+                        //if Window resized call  resetSize()
                         if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
                             resetSize();
+                    // call give function on new event
                     EventUpdateFunction(_event.type);
                 }
         }
         public void SetUpdate(Action Update)
         {
+            // if window is open
             while (isWindowOpened)
-            {                
+            {
+                // call give function on new event        
                 Update();
             }
         }
@@ -171,6 +160,32 @@ namespace PseudoGameEngine.graphics
             update();
         }
 
+        #endregion
+
+        #region Other Funtions
+        // Clear color buffer
+        public void Clear() { gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT); }
+
+        // Update window with OpenGL rendering
+        public void update() { SDL_GL_SwapWindow(win); }
+
+        //Creat delay of Time
+        public void Delay(uint Time)
+        {
+            SDL_Delay(Time);
+        }
+
+        public void Quit()
+        {
+            isWindowOpened = false;
+            // Delete our OpengL context
+            SDL_GL_DeleteContext(glContext);
+            //Destroy window
+            SDL_DestroyWindow(win);
+            win = IntPtr.Zero;
+            //Quit SDL subsystems
+            SDL_Quit();
+        }
         #endregion
     }
 }
