@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static SDL2.SDL;
 using SharpGL;
+using PseudoGameEngine.input;
 
 namespace PseudoGameEngine.graphics
 {
@@ -98,7 +99,68 @@ namespace PseudoGameEngine.graphics
             update();
 
             return true;
-        }      
+        }
+
+        #region Input
+
+        InputInit II = new InputInit();
+
+        public bool isKeyPresed(KeyCode keycode)
+        {
+            if (_event.type == SDL_EventType.SDL_KEYDOWN)
+                if (_event.key.keysym.sym == II.kecodefinder[keycode])
+                    return true;
+            if(_event.type == SDL_EventType.SDL_KEYUP)
+                if (_event.key.keysym.sym == II.kecodefinder[keycode])
+                    return false;
+            return false;
+        }
+
+        public bool isMouseButtonPressed(input.MouseButton code)
+        {
+            if (_event.type == SDL_EventType.SDL_MOUSEBUTTONDOWN)
+            {
+                if (code == input.MouseButton.RIGHT)
+                {
+                    if (_event.button.button == SDL_BUTTON_RIGHT)
+                        return true;
+                }
+                else if(code == input.MouseButton.LEFT)
+                {
+                    if (_event.button.button == SDL_BUTTON_LEFT)
+                        return true;
+                }
+            }
+            if (_event.type == SDL_EventType.SDL_MOUSEBUTTONUP)
+            {
+                if (code == input.MouseButton.RIGHT)
+                {
+                    if (_event.button.button == SDL_BUTTON_RIGHT)
+                        return false;
+                }
+                else if (code == input.MouseButton.LEFT)
+                {
+                    if (_event.button.button == SDL_BUTTON_LEFT)
+                        return false;
+                }
+            }
+            return false;
+        }
+
+        int x, y;
+
+        public int MousePositionX()
+        {
+            SDL_GetMouseState(out x, out y);
+            return x;
+        }
+        public int MousePositionY()
+        {
+            SDL_GetMouseState(out x, out y);
+            return y;
+        }
+
+        #endregion
 
         #region Event and Updates
         // call Funtion on event and without event update

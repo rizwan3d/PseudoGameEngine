@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PseudoGameEngine.graphics;
+using PseudoGameEngine.input;
 using static SDL2.SDL;
 using SharpGL;
 
@@ -24,6 +25,14 @@ namespace PseudoGameEngine_Test
         {
             /* If a quit event has been sent */
             if (_event == SDL_EventType.SDL_QUIT) window.Quit();
+            if (window.isKeyPresed(KeyCode.a))
+                Console.WriteLine("PRESED!");
+            //if (window.isMouseButtonPressed(MouseButton.RIGHT))
+            //    Console.WriteLine("PRESED!");
+            //int x = window.MousePositionX();
+            //int y = window.MousePositionY();
+            //Console.WriteLine("{0},{1}", x, y);
+
             return 0;
         }
 
