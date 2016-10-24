@@ -5,10 +5,13 @@ This is my Final Year project which is under development.
 
 PseudoGameEngine use following Open Sorce projects:
 
-1) SDL.
-2) SDL-CS.
-3) SharpGl.
-4) Mono Xna Math.
+1.SDL
+
+2.SDL-CS
+
+3.SharpGl
+
+4.Mono Xna Math
 
 MIT License
 Copyright © 20166 Muhammad Rizwan.
