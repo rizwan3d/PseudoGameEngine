@@ -7,7 +7,7 @@ using PseudoGameEngine;
 using PseudoGameEngine.graphics;
 using PseudoGameEngine.input;
 using SharpGL;
-
+using static SDL2.SDL;
 
 namespace PseudoGameEngine_Test
 {
@@ -26,6 +26,7 @@ namespace PseudoGameEngine_Test
             {
                 Console.WriteLine(e.ToString());
             }
+
             window.SetUpdate(EventUpdate, update);         
         }
 
@@ -35,11 +36,11 @@ namespace PseudoGameEngine_Test
             if (_event == Event.QUIT) window.Quit();           
             if (window.isKeyPresed(KeyCode.a))
                 Console.WriteLine("PRESED!");
-            //if (window.isMouseButtonPressed(MouseButton.RIGHT))
-            //    Console.WriteLine("PRESED!");
-            //int x = window.MousePositionX();
-            //int y = window.MousePositionY();
-            //Console.WriteLine("{0},{1}", x, y);
+            if (window.isMouseButtonPressed(MouseButton.RIGHT))
+                Console.WriteLine("PRESED!");
+            int x = window.MousePositionX();
+            int y = window.MousePositionY();
+            Console.WriteLine("{0},{1}", x, y);
 
             return 0;
         }
@@ -48,6 +49,7 @@ namespace PseudoGameEngine_Test
         {
             window.Clear();
 
+          
             gl.Begin(OpenGL.GL_TRIANGLES);
             gl.Vertex(0, 0.5f);
             gl.Vertex(-0.5f, -0.5f);

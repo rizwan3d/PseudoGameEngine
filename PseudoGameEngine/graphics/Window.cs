@@ -16,7 +16,7 @@ namespace PseudoGameEngine.graphics
         OpenGL gl = new OpenGL();
 
         //pointer for Window
-        IntPtr win;
+        IntPtr win;     
 
         //Window Information
         int Weight, Height;
