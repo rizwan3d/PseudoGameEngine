@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Events\Events.cs" />
+    <Compile Include="exception.cs" />
     <Compile Include="graphics\Window.cs" />
     <Compile Include="input\InputEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -23,16 +23,14 @@ namespace PseudoGameEngine.graphics
         string Title;
         bool isFullScreen;
         SDL_WindowFlags Flags;
-
-        //Error Information
-        string _error;
-
+             
         //Creat Context Pointer for OpenGl 
         IntPtr glContext;
 
         //SDL Event var
         SDL_Event _event;
 
+        // store information of window
         bool isWindowOpened;
 
         public Window(string title,int weight,int height,bool fullscreen = true)
@@ -59,15 +57,15 @@ namespace PseudoGameEngine.graphics
             if (SDL_Init(SDL_INIT_VIDEO) < 0)
             // return error is unable to initializing SDL
             {
-                _error = "Error occurred initializing SDL";
+                throw (new initializing_SDL("Error occurred initializing SDL"));
                 return false;
             }
             // Create Window with given Information
             win = SDL.SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Weight, Height, Flags);
             // return error is unable to Create Window
             if (win == null || win == IntPtr.Zero)
-            {               
-                _error = "Error occurred initializing Window";
+            {
+                throw (new initializing_Window("Error occurred initializing Window"));
                 return false;
             }
             initgl();
@@ -89,7 +87,7 @@ namespace PseudoGameEngine.graphics
             // return error is unable to Create Window
             if (glContext == null || glContext == IntPtr.Zero)  
             {
-                _error = "Error occurred creating OpenGL context";
+                throw (new initializing_OpenGL_context("Error occurred creating OpenGL context"));
                 return false;
             }
 
@@ -103,13 +101,17 @@ namespace PseudoGameEngine.graphics
 
         #region Input
 
+        //create a instance of InputInit 
         InputInit II = new InputInit();
 
         public bool isKeyPresed(KeyCode keycode)
         {
+            // if event is related to key down
             if (_event.type == SDL_EventType.SDL_KEYDOWN)
+                // return true if event key is same as input key
                 if (_event.key.keysym.sym == II.kecodefinder[keycode])
                     return true;
+            // same as up but if key up and return false
             if(_event.type == SDL_EventType.SDL_KEYUP)
                 if (_event.key.keysym.sym == II.kecodefinder[keycode])
                     return false;
@@ -118,19 +120,23 @@ namespace PseudoGameEngine.graphics
 
         public bool isMouseButtonPressed(input.MouseButton code)
         {
+            // if event related to mouse button doen
             if (_event.type == SDL_EventType.SDL_MOUSEBUTTONDOWN)
             {
+                // button is Right and return true
                 if (code == input.MouseButton.RIGHT)
                 {
                     if (_event.button.button == SDL_BUTTON_RIGHT)
                         return true;
                 }
+                // same as up but for left
                 else if(code == input.MouseButton.LEFT)
                 {
                     if (_event.button.button == SDL_BUTTON_LEFT)
                         return true;
                 }
             }
+            // same up but return false if event is relater to button up
             if (_event.type == SDL_EventType.SDL_MOUSEBUTTONUP)
             {
                 if (code == input.MouseButton.RIGHT)
@@ -147,24 +153,32 @@ namespace PseudoGameEngine.graphics
             return false;
         }
 
+        // var to store mouse positions
         int x, y;
 
         public int MousePositionX()
         {
+            // get postion and store to x and y
             SDL_GetMouseState(out x, out y);
+            //return x postion
             return x;
         }
         public int MousePositionY()
         {
+            // get postion and store to x and y
             SDL_GetMouseState(out x, out y);
+            //return x postion
             return y;
         }
 
         #endregion
 
         #region Event and Updates
+
+        eventInit ei = new eventInit();
+
         // call Funtion on event and without event update
-        public void SetUpdate(Func<SDL_EventType,int> EventUpdateFunction,Action Update)
+        public void SetUpdate(Func<Event, int> EventUpdateFunction,Action Update)
         {
             // if window is open
             while (isWindowOpened)
@@ -178,7 +192,8 @@ namespace PseudoGameEngine.graphics
                         if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
                             resetSize();
                     // call give function on new event
-                    EventUpdateFunction(_event.type);                   
+                    Event e = ei.eventfinder[_event.type];
+                    EventUpdateFunction(e);                   
                 }
                 //call other update function
                 Update();

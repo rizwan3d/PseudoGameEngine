@@ -7,24 +7,32 @@ using PseudoGameEngine.graphics;
 using PseudoGameEngine.input;
 using static SDL2.SDL;
 using SharpGL;
+using PseudoGameEngine;
 
 namespace PseudoGameEngine_Test
 {
     class Program
     {
+        
         static OpenGL gl = new OpenGL();
         static Window window;
         static void Main(string[] args)
         {
-            window = new Window("Text",800,600,false);
+            try
+            {
+                window = new Window("Text", 800, 600, false);
+            }
+            catch(initializing_SDL e)
+            {
+                Console.WriteLine(e.ToString());
+            }
             window.SetUpdate(EventUpdate, update);         
-            window.Quit();
         }
 
-        static int EventUpdate(SDL_EventType _event)
+        static int EventUpdate(Event _event)
         {
             /* If a quit event has been sent */
-            if (_event == SDL_EventType.SDL_QUIT) window.Quit();
+            if (_event == Event.QUIT) window.Quit();           
             if (window.isKeyPresed(KeyCode.a))
                 Console.WriteLine("PRESED!");
             //if (window.isMouseButtonPressed(MouseButton.RIGHT))
