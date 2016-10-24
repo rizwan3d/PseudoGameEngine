@@ -56,6 +56,13 @@ namespace PseudoGameEngine_Test
             gl.Vertex(0.5, -0.5f); 
             gl.End();
 
+            gl.Begin(OpenGL.GL_POLYGON);
+            gl.Vertex(0, 0);
+            gl.Vertex(1, 1);
+            gl.Vertex(-1, 1);
+            gl.Vertex(1, -1);
+            gl.End();
+
             window.update();
         }
     

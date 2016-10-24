@@ -1,7 +1,7 @@
 # PseudoGameEngine
 Open Sorce C# Game Engine 
 
-This is my Final Year project which is under development.
+This is my Final Year project and it is in under development.
 
 PseudoGameEngine use following Open Sorce projects:
 

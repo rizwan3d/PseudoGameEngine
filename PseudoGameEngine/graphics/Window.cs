@@ -69,7 +69,6 @@ namespace PseudoGameEngine.graphics
             isWindowOpened = true;
             return true;
         }
-
         bool initgl()
         {
             // SDL_GL_CONTEXT_CORE gives us only the newer version, deprecated functions are disabled
