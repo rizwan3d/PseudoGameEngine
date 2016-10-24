@@ -40,11 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="exception.cs" />
     <Compile Include="graphics\Window.cs" />
     <Compile Include="input\InputEnums.cs" />
+    <Compile Include="math\MathHelper.cs" />
+    <Compile Include="math\Matrix.cs" />
+    <Compile Include="math\Quaternion.cs" />
+    <Compile Include="math\Vector2.cs" />
+    <Compile Include="math\Vector3.cs" />
+    <Compile Include="math\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +63,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="math\" />
     <Folder Include="sysinfo\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

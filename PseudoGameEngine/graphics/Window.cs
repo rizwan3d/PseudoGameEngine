@@ -46,10 +46,7 @@ namespace PseudoGameEngine.graphics
             if (fullscreen)
                 Flags |= SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
 
-            if (!Init())
-                Console.WriteLine(_error);
-            else
-                isWindowOpened = true;
+            Init();
         }
         bool Init()
         {
@@ -69,6 +66,7 @@ namespace PseudoGameEngine.graphics
                 return false;
             }
             initgl();
+            isWindowOpened = true;
             return true;
         }
 
