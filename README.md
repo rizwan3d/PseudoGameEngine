@@ -14,7 +14,7 @@ PseudoGameEngine use following Open Sorce projects:
 4. Mono Xna Math
 
 MIT License
-Copyright © 20166 Muhammad Rizwan.
+Copyright © 2016 Muhammad Rizwan.
 
 All rights reserved.
 
