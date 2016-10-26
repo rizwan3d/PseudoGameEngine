@@ -33,6 +33,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Readme", "Readme", "{4D1C97
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shaders", "shaders", "{09DD600A-317F-49A3-B877-99428E2AEFA5}"
+	ProjectSection(SolutionItems) = preProject
+		PseudoGameEngine_Test\bin\Debug\minimal.frag = PseudoGameEngine_Test\bin\Debug\minimal.frag
+		PseudoGameEngine_Test\bin\Debug\minimal.vert = PseudoGameEngine_Test\bin\Debug\minimal.vert
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

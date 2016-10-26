@@ -33,7 +33,7 @@ namespace PseudoGameEngine.graphics
         // store information of window
         bool isWindowOpened;
 
-        public Window(string title,int weight,int height,bool fullscreen = true)
+        public Window(string title, int weight, int height, bool fullscreen = true)
         {
             //Set windows information to private var
             Title = title;
@@ -41,59 +41,72 @@ namespace PseudoGameEngine.graphics
             Height = height;
             isFullScreen = fullscreen;
             // Alow SDL to use OpenGL and Window RESIZABLE
-            Flags = SDL_WindowFlags.SDL_WINDOW_OPENGL | SDL_WindowFlags.SDL_WINDOW_SHOWN | SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_ALLOW_HIGHDPI;
+            Flags =  SDL_WindowFlags.SDL_WINDOW_OPENGL | SDL_WindowFlags.SDL_WINDOW_SHOWN | SDL_WindowFlags.SDL_WINDOW_RESIZABLE | SDL_WindowFlags.SDL_WINDOW_ALLOW_HIGHDPI;
             // Insert flag to make window FullSceen 
             if (fullscreen)
                 Flags |= SDL_WindowFlags.SDL_WINDOW_FULLSCREEN;
 
             Init();
         }
-        bool Init()
+        void Init()
         {
             //initializing SDL
             if (SDL_Init(SDL_INIT_VIDEO) < 0)
             // return error is unable to initializing SDL
             {
-                throw (new initializing_SDL("Error occurred initializing SDL"));
-                return false;
+                throw (new initializing_SDL("Error occurred initializing SDL"));               
             }
             // Create Window with given Information
             win = SDL.SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Weight, Height, Flags);
             // return error is unable to Create Window
             if (win == null || win == IntPtr.Zero)
             {
-                throw (new initializing_Window("Error occurred initializing Window"));
-                return false;
+                throw (new initializing_Window("Error occurred initializing Window"));               
             }
             initgl();
-            isWindowOpened = true;
-            return true;
+            isWindowOpened = true;           
         }
-        bool initgl()
+        void initgl()
         {
             // SDL_GL_CONTEXT_CORE gives us only the newer version, deprecated functions are disabled
             SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_CONTEXT_PROFILE_MASK, (int)SDL_GLattr.SDL_GL_CONTEXT_PROFILE_CORE);
-            
+
+
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_RED_SIZE, 8);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_GREEN_SIZE, 8);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_BLUE_SIZE, 8);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_ALPHA_SIZE, 8);
+
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_DEPTH_SIZE, 16);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_BUFFER_SIZE, 32);
+
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_ACCUM_RED_SIZE, 8);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_ACCUM_GREEN_SIZE, 8);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_ACCUM_BLUE_SIZE, 8);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_ACCUM_ALPHA_SIZE, 8);
+
+
             // Turn on double buffering with a 24bit Z buffer.
             // You may need to change this to 16 or 32 for your system 
-            SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_DOUBLEBUFFER, 1);
-            SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_DEPTH_SIZE, 16);           
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_DOUBLEBUFFER, 1);
+            //SDL_GL_SetAttribute(SDL_GLattr.SDL_GL_DEPTH_SIZE, 16);
 
             glContext = SDL_GL_CreateContext(win);
 
             // return error is unable to Create Window
             if (glContext == null || glContext == IntPtr.Zero)  
             {
-                throw (new initializing_OpenGL_context("Error occurred creating OpenGL context"));
-                return false;
+                throw (new initializing_OpenGL_context("Error occurred creating OpenGL context"));               
             }
+
 
             // Set background color as cornflower blue
             gl.ClearColor(0.39f, 0.58f, 0.93f, 1.0f);
+            
+
+
             Clear();
             update();
-
-            return true;
         }
 
         #region Input
