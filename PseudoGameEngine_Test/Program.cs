@@ -24,33 +24,44 @@ namespace PseudoGameEngine_Test
             try
             {
                 window = new Window("Text", 800, 600, false);
-                
 
+
+                //float[] vert = new float[]{
+                //    -0.5f,-0.5f,0.0f,
+                //    -0.5f, 0.5f,0.0f,
+                //     0.5f, 0.5f,0.0f,
+                //     0.5f, 0.5f,0.0f,
+                //     0.5f,-0.5f,0.0f,
+                //    -0.5f,-0.5f,0.0f,
+                //};
                 float[] vert = new float[]{
-                    -0.5f,-0.5f,0.0f,
-                    -0.5f, 0.5f,0.0f,
-                     0.5f, 0.5f,0.0f,
-                     0.5f, 0.5f,0.0f,
-                     0.5f,-0.5f,0.0f,
-                    -0.5f,-0.5f,0.0f,
+                     0,0,0,
+                     8,0,0,
+                     0,3,0,
+                     0,3,0,
+                     8,3,0,
+                     8,0,0,
                 };
 
-                
                 UInt32[] vbo = new UInt32[2];
 
                
-                gl.GenVertexArrays(1, vbo);
+                gl.GenBuffers(1, vbo);
                 gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, vbo[0]);
-                //           
-                gl.BufferData(OpenGL.GL_ARRAY_BUFFER, vert, OpenGL.GL_STATIC_DRAW);
-               
+                gl.BufferData(OpenGL.GL_ARRAY_BUFFER, vert, OpenGL.GL_STATIC_DRAW);               
                 gl.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 0, IntPtr.Zero);
                 gl.EnableVertexAttribArray(0);
-
+               
                
                 shader s = new shader("minimal.vert", "minimal.frag");
-                
+           
                 s.enable();
+              s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographic(0.0, 16.0, -1.0, 1.0));
+                s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(new Vector3(2, 2, 0)));
+                s.SetUniform("light_pos", new Vector2(4, 1.5f));
+                s.SetUniform("colour", new Vector4(0f, 0.0f, 1f, 1.0f));
+
+
             }
             catch (Exception e)
             {
@@ -79,8 +90,6 @@ namespace PseudoGameEngine_Test
 
         static void update()
         {
-            window.Clear();
-
             gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
             //gl.LoadIdentity();
@@ -91,8 +100,8 @@ namespace PseudoGameEngine_Test
             //gl.Color(1, 0, 1); gl.Vertex(100, 100, 0);
             //gl.Color(1, 1, 1); gl.Vertex(0, 100, 0);
             //gl.End();
-            
-            
+
+
             //gl.Begin(OpenGL.GL_TRIANGLES);
             //gl.Vertex(0, 0.5f);
             //gl.Vertex(-0.5f, -0.5f);
@@ -106,7 +115,6 @@ namespace PseudoGameEngine_Test
             //gl.Vertex(1, -1);
             //gl.End();
 
-            window.update();
         }
         
 

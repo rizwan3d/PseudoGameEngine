@@ -2106,5 +2106,30 @@ namespace PseudoGameEngine.math
             return true;
         }
 
+        public float[] toFloat()
+        {
+            
+            float[] toReturn = new float[4*4];
+            
+            toReturn[0] = (float)this.M11;
+            toReturn[1] = (float)this.M12;
+            toReturn[2] = (float)this.M13;
+            toReturn[3] = (float)this.M14;
+            toReturn[4] = (float)this.M21;
+            toReturn[5] = (float)this.M22;
+            toReturn[6] = (float)this.M23;
+            toReturn[7] = (float)this.M24;
+            toReturn[8] = (float)this.M31;
+            toReturn[9] = (float)this.M32;
+            toReturn[10] = (float)this.M33;
+            toReturn[11] = (float)this.M34;
+            toReturn[12] = (float)this.M41;
+            toReturn[13] = (float)this.M42;
+            toReturn[14] = (float)this.M43;
+            toReturn[15] = (float)this.M44;           
+
+            return toReturn;
+        }
+
     }
 }

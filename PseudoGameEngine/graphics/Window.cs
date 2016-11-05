@@ -16,7 +16,7 @@ namespace PseudoGameEngine.graphics
         OpenGL gl = new OpenGL();
 
         //pointer for Window
-        IntPtr win;     
+        public IntPtr win;     
 
         //Window Information
         int Weight, Height;
@@ -202,11 +202,13 @@ namespace PseudoGameEngine.graphics
                         if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
                             resetSize();
                     // call give function on new event
-                    Event e = ei.eventfinder[_event.type];
-                    EventUpdateFunction(e);                   
+                    Event e = ei.eventfinder[_event.type];                    
+                    EventUpdateFunction(e);                             
                 }
                 //call other update function
-                Update();
+                Clear();
+                Update();//input function
+                update();//update gl port
             }
         }
         public void SetUpdate(Func<SDL_EventType, int> EventUpdateFunction)
@@ -231,7 +233,9 @@ namespace PseudoGameEngine.graphics
             while (isWindowOpened)
             {
                 // call give function on new event        
-                Update();
+                Clear();
+                Update();//input function
+                update();//update gl port
             }
         }
 
