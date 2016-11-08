@@ -44,6 +44,9 @@
   <ItemGroup>
     <Compile Include="Events\Events.cs" />
     <Compile Include="exception.cs" />
+    <Compile Include="graphics\buffers\buffer.cs" />
+    <Compile Include="graphics\buffers\indexbuffer.cs" />
+    <Compile Include="graphics\buffers\vertexarray.cs" />
     <Compile Include="graphics\images\image.cs" />
     <Compile Include="graphics\shader.cs" />
     <Compile Include="graphics\Window.cs" />

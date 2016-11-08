@@ -32,67 +32,104 @@ namespace PseudoGameEngine.graphics
 
         public UInt32 load()
         {
-            //opengl program for shaders
-            UInt32 program = gl.CreateProgram();
-            //var for vertex shader
-            UInt32 vertex = gl.CreateShader(OpenGL.GL_VERTEX_SHADER);
-            //var for fragment shader
-            UInt32 fragment = gl.CreateShader(OpenGL.GL_FRAGMENT_SHADER);
+            #region old code
+            ////opengl program for shaders
+            //UInt32 program = gl.CreateProgram();
+            ////var for vertex shader
+            //UInt32 vertex = gl.CreateShader(OpenGL.GL_VERTEX_SHADER);
+            ////var for fragment shader
+            //UInt32 fragment = gl.CreateShader(OpenGL.GL_FRAGMENT_SHADER);
+
+            ////read shaders sorce
+            //string vertsorce = System.IO.File.ReadAllText(m_vertPath);
+            //string fragsorce = System.IO.File.ReadAllText(m_fragPath);
+            #endregion
+
 
             //read shaders sorce
             string vertsorce = System.IO.File.ReadAllText(m_vertPath);
             string fragsorce = System.IO.File.ReadAllText(m_fragPath);
 
+            
+            Shader vs = new Shader();
+            Shader fs = new Shader();
 
-            //compile vertex shader
-            gl.ShaderSource(vertex, vertsorce);
-            gl.CompileShader(vertex);
+            vs.Create(gl, OpenGL.GL_VERTEX_SHADER, vertsorce);
+            fs.Create(gl, OpenGL.GL_FRAGMENT_SHADER, fragsorce);
 
-            //store error
-            int[] result = new int[1];
-            //get information oof compiled shader
-            gl.GetShader(vertex, OpenGL.GL_COMPILE_STATUS, result);
-
-            //if compilation gives error delete shader and throw error
-            if (result[0] == OpenGL.GL_FALSE)
+            if (vs.GetCompileStatus(gl) == false)
             {
-                gl.DeleteShader(vertex);
-                throw (new initializing_vertex_Shader("Failed to Compile Vertex Shader"));
+                vs.Delete(gl);
+                throw (new initializing_vertex_Shader("Failed to Compile Vertex Shader"));               
             }
 
-            //same as up but for fragment shader
-            gl.ShaderSource(fragment, fragsorce);
-            gl.CompileShader(fragment);
-
-            int[] resultF = new int[1];
-            gl.GetShader(fragment, OpenGL.GL_COMPILE_STATUS, resultF);
-
-            if (result[0] == OpenGL.GL_FALSE)
+            if (fs.GetCompileStatus(gl) == false)
             {
-                gl.DeleteShader(fragment);
+                fs.Delete(gl);
                 throw (new initializing_fragment_Shader("Failed to Compile fragment Shader"));
             }
+            uint shaderProgramObject = gl.CreateProgram();
+            gl.AttachShader(shaderProgramObject, vs.ShaderObject);
+            gl.AttachShader(shaderProgramObject, fs.ShaderObject);
 
-            //attach vetex shader to opengl program
-            gl.AttachShader(program, vertex);
-            gl.AttachShader(program, fragment);
+            gl.LinkProgram(shaderProgramObject);
+            gl.ValidateProgram(shaderProgramObject);
 
-            //link and validate program
-            gl.LinkProgram(program);
-            gl.ValidateProgram(program);
 
-            //free space form unuseable shaders
-            gl.DeleteShader(vertex);
-            gl.DeleteShader(fragment);
+
+            #region old code
+            ////compile vertex shader
+            //gl.ShaderSource(vertex, vertsorce);
+            //gl.CompileShader(vertex);
+
+            ////store error
+            //int[] result = new int[1];
+            ////get information oof compiled shader
+            //gl.GetShader(vertex, OpenGL.GL_COMPILE_STATUS, result);
+
+            ////if compilation gives error delete shader and throw error
+            //if (result[0] == OpenGL.GL_FALSE)
+            //{
+
+            //    gl.DeleteShader(vertex);
+            //    throw (new initializing_vertex_Shader("Failed to Compile Vertex Shader"));
+            //}
+
+            ////same as up but for fragment shader
+            //gl.ShaderSource(fragment, fragsorce);
+            //gl.CompileShader(fragment);
+
+            //int[] resultF = new int[1];
+            //gl.GetShader(fragment, OpenGL.GL_COMPILE_STATUS, resultF);
+
+            //if (result[0] == OpenGL.GL_FALSE)
+            //{
+            //    gl.DeleteShader(fragment);
+            //    throw (new initializing_fragment_Shader("Failed to Compile fragment Shader"));
+            //}
+
+            ////attach vetex shader to opengl program
+            //gl.AttachShader(program, vertex);
+            //gl.AttachShader(program, fragment);
+
+            ////link and validate program
+            //gl.LinkProgram(program);
+            //gl.ValidateProgram(program);
+
+            ////free space form unuseable shaders
+            // gl.DeleteShader(vertex);
+            // gl.DeleteShader(fragment);
+
+            #endregion
 
             //return shader id
-            return program;
+            return shaderProgramObject;
 
         }
 
         public void enable()
         {
-            //enable shaders
+            //enable shaders           
             gl.UseProgram(m_shaderID);
         }
 
@@ -101,7 +138,7 @@ namespace PseudoGameEngine.graphics
             //disable shaders
             gl.UseProgram(0);
         }
-
+        
         Int32 GetUniformLoacation(string name)
         {
             return gl.GetUniformLocation(m_shaderID, name);

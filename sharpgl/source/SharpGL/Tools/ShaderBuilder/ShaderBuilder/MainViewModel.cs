@@ -21,10 +21,10 @@ namespace ShaderBuilder
         public MainViewModel()
         {
             //  Get the vendor strings.
-            OpenGLVendor = ApplicationState.Instance.OpenGL.Vendor;
-            OpenGLVersion = ApplicationState.Instance.OpenGL.Version;
-            OpenGLRenderer = ApplicationState.Instance.OpenGL.Renderer;
-            OpenGLShadingLanguageVersion = ApplicationState.Instance.OpenGL.GetString(OpenGL.GL_SHADING_LANGUAGE_VERSION);
+            //OpenGLVendor = ApplicationState.Instance.OpenGL.Vendor;
+            //OpenGLVersion = ApplicationState.Instance.OpenGL.Version;
+            //OpenGLRenderer = ApplicationState.Instance.OpenGL.Renderer;
+            //OpenGLShadingLanguageVersion = ApplicationState.Instance.OpenGL.GetString(OpenGL.GL_SHADING_LANGUAGE_VERSION);
         
             //  If the strings are empty, set them to something more descriptive.
             if (string.IsNullOrEmpty(OpenGLVendor)) OpenGLVendor = "<none>";
