@@ -9,13 +9,14 @@ namespace PseudoGameEngine.graphics
 {
     public class indexbuffer
     {
-        SharpGL.VertexBuffers.IndexBuffer _indexbuffer = new SharpGL.VertexBuffers.IndexBuffer();
+        SharpGL.VertexBuffers.IndexBuffer _indexbuffer;
 
         uint Count;
         OpenGL gl = new OpenGL();      
 
         public indexbuffer(ushort[] data,  uint Count)
         {
+            _indexbuffer = new SharpGL.VertexBuffers.IndexBuffer();
             this.Count = Count;
             _indexbuffer.Create(gl);
             _indexbuffer.Bind(gl);

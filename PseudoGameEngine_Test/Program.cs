@@ -48,33 +48,32 @@ namespace PseudoGameEngine_Test
                 //     0,3,0,
                 //     0,3,0,
                 //     8,3,0,
-                //     8,0,0,
+                //     8,8,0,
                 //};
                 float[] vert = new float[]{
-                     0,0,0,                     
-                     8,3,0,
-                     8,3,0,                     
+                     0,0,0,
+                     0,3,0,
+                     0,3,0,
                      0,0,0,
                 };
 
                 ushort[] ind = {
                     0,1,2,
                     2,3,0,
-
-                }                ;
+                };
 
 
                 //UInt32[] vbo = new UInt32[2];
-                
-
-               
 
 
-               vao =new VertexArray();
+
+
+
+                vao =new VertexArray();
                 buffer vbo = new buffer(vert,4*3,3);
-               ibo = new indexbuffer(ind, 6);
+                ibo = new indexbuffer(ind, 6);
 
-                vao.AddBuffer(vbo, 0);
+                // vao.AddBuffer(vbo, 0);
 
                 //gl.GenBuffers(1, vbo);
                 //gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, vbo[0]);
@@ -89,8 +88,8 @@ namespace PseudoGameEngine_Test
                 s.enable();
                 s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographic(0.0, 16.0, -1.0, 1.0));
                 s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(new Vector3(2, 2, 0)));
-                s.SetUniform("light_pos", new Vector2(4, 1.5f));
-                s.SetUniform("colour", new Vector4(1f, 0.0f, 1f, 1.0f));
+                //s.SetUniform("light_pos", new Vector2(4, 1.5f));
+                s.SetUniform("colour", new Vector4(1f,0f, 1f, 1.0f));
 
 
 
@@ -123,15 +122,15 @@ namespace PseudoGameEngine_Test
 
         static void update()
         {
-            gl.ClearColor(0, 0, 0,0);
-            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+            //gl.ClearColor(0, 0, 0,0);
+            // gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
 
             vao.Bind();
             ibo.bind();
             gl.DrawElements(OpenGL.GL_TRIANGLES, (int)ibo.GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
             ibo.bind();
-            vao.unbind();
+            vao.Unbind();
 
 
             //gl.LoadIdentity();
