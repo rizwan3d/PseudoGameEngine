@@ -58,6 +58,7 @@
     <Compile Include="math\Vector3.cs" />
     <Compile Include="math\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysinfo\sysinfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDL2-CS\SDL2.csproj">
@@ -69,9 +70,7 @@
       <Name>SharpGL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="sysinfo\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
