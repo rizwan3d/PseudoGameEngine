@@ -35,44 +35,25 @@ namespace PseudoGameEngine_Test
 
 
                 //SharpGL.Shaders.Shader s = new Shader("a.vert", "a.frag");
-                float[] vert = new float[]{
-                    -0.5f,-0.5f,0.0f,
-                    -0.5f, 0.5f,0.0f,
-                     0.5f, 0.5f,0.0f,
-                     0.5f, 0.5f,0.0f,
-                     0.5f,-0.5f,0.0f,
-                    -0.5f,-0.5f,0.0f,
-                };
                 //float[] vert = new float[]{
-                //     0,0,0,
-                //     8,0,0,
-                //     0,3,0,
-                //     0,3,0,
-                //     8,3,0,
-                //     8,8,0,
-                //};
-                //float[] vert = new float[]{
-                //     0,0,0,
-                //     0,3,0,
-                //     0,3,0,
-                //     0,0,0,
-                //};
-
-                //float[] vert = new float[]{
-                //    -0.5f,-0.5f,0.0f,                    
+                //    -0.5f,-0.5f,0.0f,
+                //    -0.5f, 0.5f,0.0f,
                 //     0.5f, 0.5f,0.0f,
-                //     0.5f, 0.5f,0.0f,                  
+                //     0.5f, 0.5f,0.0f,
+                //     0.5f,-0.5f,0.0f,
                 //    -0.5f,-0.5f,0.0f,
                 //};
-
-                ushort[] ind = {
-                    0,1,2,
-                    2,3,0,
+                float[] vert = new float[]{
+                    -0.5f,0.5f,0.0f,
+                    -0.5f, -0.5f,0.0f,
+                     0.5f, -0.5f,0.0f,
+                     0.5f, 0.5f,0.0f,                  
                 };
-
-
-                UInt32[] vbo = new UInt32[2];
-
+               
+                ushort[] ind = {
+                    0,1,3,
+                    3,1,2,
+                };
                 
                 Console.WriteLine("Vendor {0}", sysinfo.Vendor());
                 Console.WriteLine("Render {0}", sysinfo.Render());
@@ -80,17 +61,20 @@ namespace PseudoGameEngine_Test
                 Console.WriteLine("ShadingLanguageVersion {0}", sysinfo.ShadingLanguageVersion());
 
 
-                //vao =new VertexArray();
-                //buffer vbo = new buffer(vert,4*3,3);
-                //ibo = new indexbuffer(ind, 6);
+                vao = new VertexArray();
+                buffer vbo = new buffer(vert, 4 * 3, 3);
+                ibo = new indexbuffer(ind, 6);
 
-                // vao.AddBuffer(vbo, 0);
+                vao.AddBuffer(vbo, 0);
 
-                gl.GenBuffers(1, vbo);
-                gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, vbo[0]);
-                gl.BufferData(OpenGL.GL_ARRAY_BUFFER, vert, OpenGL.GL_STATIC_DRAW);
-                gl.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 0, IntPtr.Zero);
-                gl.EnableVertexAttribArray(0);
+
+                //UInt32[] vbo = new UInt32[2];
+                //gl.GenBuffers(1, vbo);
+                //gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, vbo[0]);
+                //gl.BufferData(OpenGL.GL_ARRAY_BUFFER, vert, OpenGL.GL_STATIC_DRAW);
+                //gl.VertexAttribPointer(0, 3, OpenGL.GL_FLOAT, false, 0, IntPtr.Zero);
+                //gl.EnableVertexAttribArray(0);
+
 
                 s = new shader("minimal.vert", "minimal.frag");
 
@@ -134,24 +118,19 @@ namespace PseudoGameEngine_Test
         static void update()
         {
             gl.ClearColor(0, 0, 0,0);
-            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+            // gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
 
-            //vao.Bind();
-            //ibo.bind();
-            //gl.DrawElements(OpenGL.GL_TRIANGLES, (int)ibo.GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
-            //ibo.bind();
-            //vao.Unbind();
+            vao.Bind();
+            ibo.bind();
+            gl.DrawElements(OpenGL.GL_TRIANGLES, (int)ibo.GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
+            ibo.bind();
+            vao.Unbind();
 
 
             //gl.LoadIdentity();
 
-            //gl.Begin(OpenGL.GL_QUADS);
-            //gl.Color(1, 0, 0); gl.Vertex(0, 0, 0);
-            //gl.Color(1, 1, 0); gl.Vertex(100, 0, 0);
-            //gl.Color(1, 0, 1); gl.Vertex(100, 100, 0);
-            //gl.Color(1, 1, 1); gl.Vertex(0, 100, 0);
-            //gl.End();
+
 
 
             //gl.Begin(OpenGL.GL_TRIANGLES);
