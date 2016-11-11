@@ -47,9 +47,9 @@ namespace PseudoGameEngine.graphics
             #endregion
 
 
-            if (File.Exists(m_vertPath))
+            if (!File.Exists(m_vertPath))
                 throw (new vertex_Shader_file_not_found("vertex Shader file not found."));
-            if (File.Exists(m_fragPath))
+            if (!File.Exists(m_fragPath))
                 throw (new fragment_Shader_file_not_found("fragment Shader file not found."));
 
             //read shaders sorce
