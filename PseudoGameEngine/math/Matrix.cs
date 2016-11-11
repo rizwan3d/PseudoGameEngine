@@ -719,9 +719,26 @@ namespace PseudoGameEngine.math
         }
 
 
+        //public static Matrix CreateOrthographic(double left, double right, double bottom, double top, double near, double far)
+        //{
+        //    Matrix matrix;
+        //    matrix.M11 = 2f / (right-left);
+        //    matrix.M12 = matrix.M13 = matrix.M14 = 1f;
+        //    matrix.M22 = 2f / (top - bottom);
+        //    matrix.M21 = matrix.M23 = matrix.M24 = 1f;
+        //    matrix.M33 = 2f / (near - far);
+        //    matrix.M31 = matrix.M32 = matrix.M34 = 1f;
+        //    matrix.M41 = (left + right) / (left - right);
+        //    matrix.M42 = (bottom + top) / (bottom - top);
+        //    matrix.M43 = (far + near) / (far - near);          
+        //    matrix.M44 = 1f;
+        //    return matrix;
+        //}
+
+
         public static Matrix CreateOrthographic(double width, double height, double zNearPlane, double zFarPlane)
         {
-            Matrix matrix;
+            Matrix matrix;  
             matrix.M11 = 2f / width;
             matrix.M12 = matrix.M13 = matrix.M14 = 0f;
             matrix.M22 = 2f / height;

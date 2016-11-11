@@ -9,6 +9,7 @@ using SDL2;
 using static SDL2.SDL;
 using SharpGL;
 using PseudoGameEngine.math;
+using System.IO;
 
 namespace PseudoGameEngine.graphics
 {
@@ -45,6 +46,11 @@ namespace PseudoGameEngine.graphics
             //string fragsorce = System.IO.File.ReadAllText(m_fragPath);
             #endregion
 
+
+            if (File.Exists(m_vertPath))
+                throw (new vertex_Shader_file_not_found("vertex Shader file not found."));
+            if (File.Exists(m_fragPath))
+                throw (new fragment_Shader_file_not_found("fragment Shader file not found."));
 
             //read shaders sorce
             string vertsorce = System.IO.File.ReadAllText(m_vertPath);
@@ -158,7 +164,8 @@ namespace PseudoGameEngine.graphics
         }
         public void SetUniform(string name, Vector3 val)
         {
-            gl.Uniform3(GetUniformLoacation(name), (float)val.X, (float)val.Y , (float)val.Z);
+            gl.Uniform3(GetUniformLoacation(name), (float)val.X, (float)val.Y, (float)val.Z);
+            
         }
         public void SetUniform(string name, Vector4 val)
         {

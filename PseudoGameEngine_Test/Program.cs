@@ -24,13 +24,13 @@ namespace PseudoGameEngine_Test
         static shader s;
 
         static indexbuffer ibo;
-        static VertexArray vao;
+        static VertexArray sprite1,sprite2;
 
         static void Main(string[] args)
         {
             try
             {
-                window = new Window("Text", 800, 600, false);
+                window = new Window("Text", 960, 540, false);
 
 
 
@@ -43,29 +43,59 @@ namespace PseudoGameEngine_Test
                 //     0.5f,-0.5f,0.0f,
                 //    -0.5f,-0.5f,0.0f,
                 //};
+                //float[] vert = new float[]{
+                //    -0.5f,0.5f,0.0f,
+                //    -0.5f, -0.5f,0.0f,
+                //     0.5f, -0.5f,0.0f,
+                //     0.5f, 0.5f,0.0f,
+                //};
+
+                //ushort[] ind = {
+                //    0,1,3,
+                //    3,1,2,
+                //};
                 float[] vert = new float[]{
-                    -0.5f,0.5f,0.0f,
-                    -0.5f, -0.5f,0.0f,
-                     0.5f, -0.5f,0.0f,
-                     0.5f, 0.5f,0.0f,                  
+                    0,0,0,
+                    0,3,0,
+                    8,3,0,
+                    8,0,0
+
                 };
-               
+
                 ushort[] ind = {
-                    0,1,3,
-                    3,1,2,
+                    0,1,2,
+                    2,3,0,
                 };
-                
+
+                float[] colorA = {
+                    1,0,1,1,
+                    1,0,1,1,
+                    1,0,1,1,
+                    1,0,1,1
+                };
+
+                float[] colorB = {
+                    0.2f,0.3f,0.8f,1,
+                    0.2f,0.3f,0.8f,1,
+                    0.2f,0.3f,0.8f,1,
+                    0.2f,0.3f,0.8f,1
+                };
+
                 Console.WriteLine("Vendor {0}", sysinfo.Vendor());
                 Console.WriteLine("Render {0}", sysinfo.Render());
                 Console.WriteLine("OpenGLVersion {0}", sysinfo.OpenGLVersion());
                 Console.WriteLine("ShadingLanguageVersion {0}", sysinfo.ShadingLanguageVersion());
 
 
-                vao = new VertexArray();
-                buffer vbo = new buffer(vert, 4 * 3, 3);
+                sprite1 = new VertexArray();
+                sprite2 = new VertexArray();
                 ibo = new indexbuffer(ind, 6);
 
-                vao.AddBuffer(vbo, 0);
+                sprite1.AddBuffer(new buffer(vert, 4 * 3, 3), 0);
+                sprite1.AddBuffer(new buffer(colorA, 4 * 4, 4), 1);
+
+                sprite2.AddBuffer(new buffer(vert, 4 * 3, 3), 0);
+                sprite2.AddBuffer(new buffer(colorB, 4 * 4, 4), 1);
 
 
                 //UInt32[] vbo = new UInt32[2];
@@ -81,10 +111,11 @@ namespace PseudoGameEngine_Test
                 //shader s = new shader("a.vert", "a.frag");
 
                 s.enable();
-                s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographic(0.0, 16.0, -1.0, 1.0));
-                s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(new Vector3(2, 2, 0)));
-                //s.SetUniform("light_pos", new Vector2(4, 1.5f));
-                s.SetUniform("colour", new Vector4(1f,0f, 1f, 1.0f));
+                s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographicOffCenter(0.0, 16.0, 0.0,9.0,-1.0, 1.0));
+                s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(new Vector3(4, 3, 0)));
+                s.SetUniform("light_pos", new Vector2(8.0f, 4.5f));
+                s.SetUniform("colour", new Vector4(0.2f,0.3f, 0.8f, 1.0f));
+                //s.SetUniform("colour", new Vector4(0.0f, 0.0f, 1f, 1.0f));
 
 
 
@@ -110,6 +141,7 @@ namespace PseudoGameEngine_Test
             int x = window.MousePositionX();
             int y = window.MousePositionY();
             s.SetUniform("light_pos", new Vector2(x * 16.0f / 960.0f, 9.0f - y * 9.0f / 540.0f));
+            //s.SetUniform("light_pos", new Vector2(x, y));
             //Console.WriteLine("{0},{1}", x, y);
 
             return 0;
@@ -121,11 +153,19 @@ namespace PseudoGameEngine_Test
             // gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
 
-            vao.Bind();
+            sprite1.Bind();
             ibo.bind();
+            s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(new Vector3(4, 3, 0)));
             gl.DrawElements(OpenGL.GL_TRIANGLES, (int)ibo.GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
             ibo.bind();
-            vao.Unbind();
+            sprite1.Unbind();
+
+            sprite2.Bind();
+            ibo.bind();
+            s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(new Vector3(0, 0, 0)));
+            gl.DrawElements(OpenGL.GL_TRIANGLES, (int)ibo.GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
+            ibo.bind();
+            sprite2.Unbind();
 
 
             //gl.LoadIdentity();
