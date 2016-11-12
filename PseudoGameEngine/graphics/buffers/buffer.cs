@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SDL2;
-using static SDL2.SDL;
-using SharpGL;
-using System.Runtime.InteropServices;
+﻿using SharpGL;
 
 namespace PseudoGameEngine.graphics
 {

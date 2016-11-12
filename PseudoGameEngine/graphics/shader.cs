@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SharpGL;
 using SharpGL.Shaders;
-using SDL2;
-using static SDL2.SDL;
-using SharpGL;
 using PseudoGameEngine.math;
 using System.IO;
 
@@ -132,7 +125,7 @@ namespace PseudoGameEngine.graphics
             return shaderProgramObject;
 
         }
-
+        
         public void enable()
         {
             //enable shaders           

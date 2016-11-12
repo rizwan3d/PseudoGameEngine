@@ -33,12 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Readme", "Readme", "{4D1C97
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shaders", "shaders", "{09DD600A-317F-49A3-B877-99428E2AEFA5}"
-	ProjectSection(SolutionItems) = preProject
-		PseudoGameEngine_Test\bin\Debug\minimal.frag = PseudoGameEngine_Test\bin\Debug\minimal.frag
-		PseudoGameEngine_Test\bin\Debug\minimal.vert = PseudoGameEngine_Test\bin\Debug\minimal.vert
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game Test 001", "Game Test 001\Game Test 001.csproj", "{0C5EEE53-C5F2-404F-9602-A9C38C862A4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3FD2EA3E-1E73-477B-A5A5-F2489BA30A8B}"

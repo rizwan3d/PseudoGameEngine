@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="shaders\minimal.frag" />
+    <None Include="shaders\minimal.vert" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PseudoGameEngine\PseudoGameEngine.csproj">
