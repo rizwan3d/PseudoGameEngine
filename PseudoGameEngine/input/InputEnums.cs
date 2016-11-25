@@ -2,7 +2,7 @@
 using static SDL2.SDL;
 using static SDL2.SDL.SDL_Keycode;
 
-namespace PseudoGameEngine.input
+namespace PseudoGameEngine.Input
 {
     public class InputInit
     {

@@ -19,7 +19,7 @@ namespace PseudoGameEngine.graphics
             _indexbuffer.Unbind(gl);           
            
         }
-
+        
         public void bind()
         {
             _indexbuffer.Bind(gl);
@@ -32,6 +32,12 @@ namespace PseudoGameEngine.graphics
         public uint GetCount()
         {
             return this.Count;
+        }
+        public void delete()
+        {
+            uint[] a = new uint[2];
+            a[0] = _indexbuffer.IndexBufferObject;
+            gl.DeleteBuffers(0, a);
         }
     }
 }

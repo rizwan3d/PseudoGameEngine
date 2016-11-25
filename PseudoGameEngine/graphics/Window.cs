@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using static SDL2.SDL;
 using SharpGL;
-using PseudoGameEngine.input;
+using PseudoGameEngine.Input;
+using PseudoGameEngine.math;
 
 namespace PseudoGameEngine.graphics
 {
@@ -128,19 +129,19 @@ namespace PseudoGameEngine.graphics
             return false;
         }
 
-        public bool isMouseButtonPressed(input.MouseButton code)
+        public bool isMouseButtonPressed(MouseButton code)
         {
             // if event related to mouse button doen
             if (_event.type == SDL_EventType.SDL_MOUSEBUTTONDOWN)
             {
                 // button is Right and return true
-                if (code == input.MouseButton.RIGHT)
+                if (code == MouseButton.RIGHT)
                 {
                     if (_event.button.button == SDL_BUTTON_RIGHT)
                         return true;
                 }
                 // same as up but for left
-                else if(code == input.MouseButton.LEFT)
+                else if(code == MouseButton.LEFT)
                 {
                     if (_event.button.button == SDL_BUTTON_LEFT)
                         return true;
@@ -149,12 +150,12 @@ namespace PseudoGameEngine.graphics
             // same up but return false if event is relater to button up
             if (_event.type == SDL_EventType.SDL_MOUSEBUTTONUP)
             {
-                if (code == input.MouseButton.RIGHT)
+                if (code == MouseButton.RIGHT)
                 {
                     if (_event.button.button == SDL_BUTTON_RIGHT)
                         return false;
                 }
-                else if (code == input.MouseButton.LEFT)
+                else if (code == MouseButton.LEFT)
                 {
                     if (_event.button.button == SDL_BUTTON_LEFT)
                         return false;
@@ -276,6 +277,12 @@ namespace PseudoGameEngine.graphics
             win = IntPtr.Zero;
             //Quit SDL subsystems
             SDL_Quit();
+            Environment.Exit(0);
+        }
+
+        public void ClearColor(Vector4 color)
+        {
+            gl.ClearColor((float)color.X, (float)color.Y, (float)color.Z, (float)color.W);
         }
         #endregion
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PseudoGameEngine.graphics
 {
-    class Rederer
+    class Renderer
     {
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using SharpGL;
 using SharpGL.VertexBuffers;
+using System.Collections.Generic;
 
 namespace PseudoGameEngine.graphics
 {
@@ -9,7 +10,7 @@ namespace PseudoGameEngine.graphics
         OpenGL gl = new OpenGL();        
        
         uint ArrayID;
-        //List<buffer> Buffers = new List<buffer>();
+        List<VertexBufferArray> Buffers = new List<VertexBufferArray>();
         VertexBufferArray vbr = new VertexBufferArray();
 
         public VertexArray()
@@ -29,6 +30,8 @@ namespace PseudoGameEngine.graphics
 
             _buffer.unbind();
             Unbind();
+
+            Buffers.Add(vbr);
         }
         public void Bind()
         {
@@ -39,14 +42,20 @@ namespace PseudoGameEngine.graphics
             vbr.Unbind(gl);
         }
 
-        //public void RemoveAll()
-        //{
-        //    foreach(buffer b in Buffers)
-        //    {
-        //        Buffers.Remove(b);
-        //    }
-        //}
-
+        public void delete()
+        {
+            foreach(VertexBufferArray b in Buffers)
+            {
+               Buffers.Remove(b);
+               uint[] a = new uint[2];
+               a[0] = b.VertexBufferArrayObject;
+               gl.DeleteBuffers(0, a);
+            }
+            uint[] c = new uint[2];
+            c[0] = ArrayID;
+            gl.DeleteBuffers(0, c);
+        }
+        
 
     }
 }

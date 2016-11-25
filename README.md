@@ -1,9 +1,7 @@
-# PseudoGameEngine
-Open Sorce C# Game Engine 
+# Pseudo🎮Engine ( PseudoGameEngine )
+Open Sorce C# 🎮 ( Game ) Engine 
 
-This is my Final Year project and it is in under development.
-
-PseudoGameEngine use following Open Sorce projects:
+Pseudo🎮Engine use following Open Sorce projects:
 
 1. SDL
 

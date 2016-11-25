@@ -12,28 +12,36 @@ namespace PseudoGameEngine.graphics
     {
         OpenGL gl = new OpenGL();
 
-        private Queue<Renderable2d> _RedererQueue = new Queue<Renderable2d>(); 
+        private Queue<StaticSprite> _RedererQueue = new Queue<StaticSprite>(); 
         public override void submit(Renderable2d Renderable) {
 
-            _RedererQueue.Enqueue(Renderable);
+            _RedererQueue.Enqueue((StaticSprite)Renderable);
 
         }
 
+        public void delete()
+        {
+            while (_RedererQueue.Count != 0)
+            {
+                StaticSprite sprite = _RedererQueue.First();
+                sprite.delete();
+            }
+        }
 
         public override void flush() {
 
             while(_RedererQueue.Count != 0) {
+            //foreach(StaticSprite sprite in _RedererQueue) { 
+                StaticSprite sprite = _RedererQueue.First();
 
-                Renderable2d renerable = _RedererQueue.First();
+                sprite.GetVertexArray().Bind();
+                sprite.GetIndexBuffer().bind();
 
-                renerable.GetVertexArray().Bind();
-                renerable.GetIndexBuffer().bind();
+                sprite.GetShader().SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(sprite.GetPosition()));
+                gl.DrawElements(OpenGL.GL_TRIANGLES, (int)sprite.GetIndexBuffer().GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
 
-                renerable.GetShader().SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(renerable.GetPosition()));
-                gl.DrawElements(OpenGL.GL_TRIANGLES, (int)renerable.GetIndexBuffer().GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
-
-                renerable.GetIndexBuffer().unbind();
-                renerable.GetVertexArray().Unbind();
+                sprite.GetIndexBuffer().unbind();
+                sprite.GetVertexArray().Unbind();
 
                 _RedererQueue.Dequeue();
 

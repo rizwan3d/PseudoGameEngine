@@ -37,5 +37,9 @@ namespace PseudoGameEngine.graphics
         {
             return this.ComponentCount;
         }
+
+        public void delete() {
+            gl.DeleteBuffers(0,bufferID);
+        }
     }
 }

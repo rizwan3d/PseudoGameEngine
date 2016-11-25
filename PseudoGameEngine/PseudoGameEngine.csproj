@@ -41,12 +41,14 @@
     <Compile Include="graphics\buffers\buffer.cs" />
     <Compile Include="graphics\buffers\indexbuffer.cs" />
     <Compile Include="graphics\buffers\vertexarray.cs" />
-    <Compile Include="graphics\images\image.cs" />
-    <Compile Include="graphics\Render\Rederer.cs" />
+    <Compile Include="graphics\Render\BatchRenderer2D.cs" />
+    <Compile Include="graphics\Render\Renderer.cs" />
     <Compile Include="graphics\Render\Renderable2d.cs" />
     <Compile Include="graphics\Render\Renderer2D.cs" />
     <Compile Include="graphics\Render\Simple2DRenderer.cs" />
     <Compile Include="graphics\shader.cs" />
+    <Compile Include="graphics\sprites\Sprite.cs" />
+    <Compile Include="graphics\sprites\StaticSprite.cs" />
     <Compile Include="graphics\Window.cs" />
     <Compile Include="input\InputEnums.cs" />
     <Compile Include="math\MathHelper.cs" />
