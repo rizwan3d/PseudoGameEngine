@@ -14,7 +14,10 @@ namespace PseudoGameEngine.graphics
         public Vector3 _position;
         public Vector2 _size;
         public Vector4 _color;
-        
+
+        shader _shader;
+        VertexArray _vertexarray;
+        indexbuffer _indexbuffer;
 
         public Renderable2d(Vector3 position, Vector2 size, Vector4 color)
         {
@@ -57,6 +60,16 @@ namespace PseudoGameEngine.graphics
         public Vector2 GetSize() { return _size; }
         public Vector4 GetColor() { return _color; }
 
+        ~Renderable2d()
+        {
+            delete();
+        }
 
+        public void delete()
+        {
+            _vertexarray.delete();
+            _indexbuffer.delete();
+            
+        }
     }
 }

@@ -3,6 +3,7 @@ using PseudoGameEngine;
 using PseudoGameEngine.graphics;
 using PseudoGameEngine.Input;
 using PseudoGameEngine.math;
+using System.Collections.Generic;
 
 namespace PseudoGameEngine_Test
 {
@@ -12,25 +13,12 @@ namespace PseudoGameEngine_Test
 
         static shader s;
 
-        //static Renderable2d sprite;
-        //static Renderable2d sprite2;
-        //static Renderable2d sprite3;
-
-        static Sprite sprite;
-        static Sprite sprite2;
-
-       // static StaticSprite sprite;
-        //static StaticSprite sprite2;
-
-        //static Simple2DRenderer render;
         static BatchRenderer2D render;
 
-        static int x, y;
+        static List<Renderable2d> sprites = new List<Renderable2d>();
 
         static void Main(string[] args)
         {
-            try
-            {
                 window = new Window("Text", 960, 540, false);
 
                 Console.WriteLine("Vendor {0}", sysinfo.Vendor());
@@ -39,46 +27,26 @@ namespace PseudoGameEngine_Test
                 Console.WriteLine("ShadingLanguageVersion {0}", sysinfo.ShadingLanguageVersion());
 
                 s = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
-
-               
-
-                //br2d= new BatchRenderer2D();
-
-                //sprite = new Sprite(5, 5,4, 4, new Vector4(1, 0, 1, 1));                
-
-                //sprite2 = new Sprite(7,1,2,3, new Vector4(0.2, 0.3, 0.8, 1));
-      
                 
-                //sprite = new Renderable2d(new Vector3(5,2.5,0), new Vector2(4,4) ,new  Vector4(1,1,0,1),s);
-                // render = new Simple2DRenderer();
-
-                //sprite2 = new Renderable2d(new Vector3(10, 0, 0), new Vector2(7, 10), new Vector4(0.4, 0.7, 0.2, 1), s);
-
-                //sprite3 = new Renderable2d(new Vector3(0, 0, 0), new Vector2(10,10), new Vector4(1, 0, 1, 1), s);
-
                 s.enable();
-                s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographicOffCenter(0.0, 16.0, 0.0,9.0,-1.0, 1.0));
-                s.SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(0.5, 3, 0));
+            s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographicOffCenter(0.0f, 16.0f, 0.0f, 9.0f, -1.0f, 1.0f));
+            //s.SetUniformMatrix("pr_matrix", Matrix.CreateOrthographicOffCenter(-1.0f, 17.0f, -1.0f, 10.0f, -1.0f, 1.0f));      
 
+            Random r = new Random();
+                int range = 1;
 
-                //sprite = new StaticSprite(5, 5, 4, 4, new Vector4(1, 0, 1, 1), s);
-                //sprite2 = new StaticSprite(7, 1, 2, 3, new Vector4(0.2, 0.3, 0.8, 1), s);
-
-                sprite = new Sprite(5, 5, 4, 4, new Vector4(1, 0, 1, 1));
-                sprite2 = new Sprite(7, 1, 2, 3, new Vector4(0.2, 0.3, 0.8, 1));
-
-
-                //render = new Simple2DRenderer();
+                for (float y = 0; y < 9.0f; y += 0.1f) 
+                {
+                    for (float x = 0; x < 16.0f; x += 0.1f)
+                    {
+                        sprites.Add(new Sprite(x, y, 0.08f, 0.08f, new Vector4((float)(r.NextDouble() * range), 0, 1, 1)));
+                    }
+                }
+                Console.WriteLine("Sprites are {0}" ,sprites.Count);
                 render = new BatchRenderer2D();
 
                 s.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
-                s.SetUniform("color", new Vector4(0.2, 0.3, 0.8, 1.0));
-
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+                s.SetUniform("color", new Vector4(0.2f, 0.3f, 0.8f, 1.0f));
 
             window.SetUpdate(EventUpdate, update);
 
@@ -87,30 +55,29 @@ namespace PseudoGameEngine_Test
 
         static int EventUpdate(Event _event)
         {
-            
-            if (_event == Event.QUIT || window.isKeyPresed(KeyCode.ESCAPE)) {window.Quit(); }
-             x = window.MousePositionX();
-             y = window.MousePositionY();
+            if (_event == Event.QUIT || window.isKeyPresed(KeyCode.ESCAPE)) { window.Quit(); }
+            if(_event == Event.MOUSEBUTTONDOWN)
+            {
+                window.Quit();
+            }
+            int x = window.MousePositionX();
+            int y = window.MousePositionY();
             s.SetUniform("light_pos", new Vector2(x * 16.0f / 960.0f, 9.0f - y * 9.0f / 540.0f));
             return 0;
         }
 
         static void update()
         {
-           // window.ClearColor(new Vector4(0, 0, 0, 0));
-
-
-            //render.submit(sprite);
-            //render.submit(sprite2);
-            //render.flush();          
+           window.ClearColor(new Vector4(0, 0, 0, 0));
+         
             render.begin();
-            render.submit(sprite);
-
-            render.submit(sprite2);
-
-            //render.submit(sprite);
+            foreach(Renderable2d s in sprites)
+            {
+                render.submit(s);
+            }                    
            render.end();
             render.flush();
+           
         }
     }
 }

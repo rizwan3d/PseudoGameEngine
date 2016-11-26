@@ -32,8 +32,8 @@ namespace PseudoGameEngine.math
     {
         #region Public Constructors
 
-        public Matrix(double m11, double m12, double m13, double m14, double m21, double m22, double m23, double m24, double m31,
-                      double m32, double m33, double m34, double m41, double m42, double m43, double m44)
+        public Matrix(float m11, float m12, float m13, float m14, float m21, float m22, float m23, float m24, float m31,
+                      float m32, float m33, float m34, float m41, float m42, float m43, float m44)
         {
             this.M11 = m11;
             this.M12 = m12;
@@ -58,22 +58,22 @@ namespace PseudoGameEngine.math
 
         #region Public Fields
 
-        public double M11;
-        public double M12;
-        public double M13;
-        public double M14;
-        public double M21;
-        public double M22;
-        public double M23;
-        public double M24;
-        public double M31;
-        public double M32;
-        public double M33;
-        public double M34;
-        public double M41;
-        public double M42;
-        public double M43;
-        public double M44;
+        public float M11;
+        public float M12;
+        public float M13;
+        public float M14;
+        public float M21;
+        public float M22;
+        public float M23;
+        public float M24;
+        public float M31;
+        public float M32;
+        public float M33;
+        public float M34;
+        public float M41;
+        public float M42;
+        public float M43;
+        public float M44;
 
         #endregion Public Fields
 
@@ -140,9 +140,9 @@ namespace PseudoGameEngine.math
 
 
         // required for OpenGL 2.0 projection matrix stuff
-        public static double[] ToFloatArray(Matrix mat)
+        public static float[] ToFloatArray(Matrix mat)
         {
-            double[] matarray = {
+            float[] matarray = {
                                     mat.M11, mat.M12, mat.M13, mat.M14,
                                     mat.M21, mat.M22, mat.M23, mat.M24,
                                     mat.M31, mat.M32, mat.M33, mat.M34,
@@ -280,14 +280,14 @@ namespace PseudoGameEngine.math
             vector.X = objectPosition.X - cameraPosition.X;
             vector.Y = objectPosition.Y - cameraPosition.Y;
             vector.Z = objectPosition.Z - cameraPosition.Z;
-            double num = vector.LengthSquared();
+            float num = vector.LengthSquared();
             if (num < 0.0001f)
             {
                 vector = cameraForwardVector.HasValue ? -cameraForwardVector.Value : Vector3.Forward;
             }
             else
             {
-                Vector3.Multiply(ref vector, (double) (1f / ((double) Math.Sqrt((double) num))), out vector);
+                Vector3.Multiply(ref vector, (float) (1f / ((float) Math.Sqrt((float) num))), out vector);
             }
             Vector3.Cross(ref cameraUpVector, ref vector, out vector3);
             vector3.Normalize();
@@ -321,14 +321,14 @@ namespace PseudoGameEngine.math
             vector.X = objectPosition.X - cameraPosition.X;
             vector.Y = objectPosition.Y - cameraPosition.Y;
             vector.Z = objectPosition.Z - cameraPosition.Z;
-            double num = vector.LengthSquared();
+            float num = vector.LengthSquared();
             if (num < 0.0001f)
             {
                 vector = cameraForwardVector.HasValue ? -cameraForwardVector.Value : Vector3.Forward;
             }
             else
             {
-                Vector3.Multiply(ref vector, (double)(1f / ((double)Math.Sqrt((double)num))), out vector);
+                Vector3.Multiply(ref vector, (float)(1f / ((float)Math.Sqrt((float)num))), out vector);
             }
             Vector3.Cross(ref cameraUpVector, ref vector, out vector3);
             vector3.Normalize();
@@ -355,7 +355,7 @@ namespace PseudoGameEngine.math
         public static Matrix CreateConstrainedBillboard(Vector3 objectPosition, Vector3 cameraPosition,
             Vector3 rotateAxis, Nullable<Vector3> cameraForwardVector, Nullable<Vector3> objectForwardVector)
         {
-            double num;
+            float num;
             Vector3 vector;
             Matrix matrix;
             Vector3 vector2;
@@ -363,14 +363,14 @@ namespace PseudoGameEngine.math
             vector2.X = objectPosition.X - cameraPosition.X;
             vector2.Y = objectPosition.Y - cameraPosition.Y;
             vector2.Z = objectPosition.Z - cameraPosition.Z;
-            double num2 = vector2.LengthSquared();
+            float num2 = vector2.LengthSquared();
             if (num2 < 0.0001f)
             {
                 vector2 = cameraForwardVector.HasValue ? -cameraForwardVector.Value : Vector3.Forward;
             }
             else
             {
-                Vector3.Multiply(ref vector2, (double)(1f / ((double)Math.Sqrt((double)num2))), out vector2);
+                Vector3.Multiply(ref vector2, (float)(1f / ((float)Math.Sqrt((float)num2))), out vector2);
             }
             Vector3 vector4 = rotateAxis;
             Vector3.Dot(ref rotateAxis, ref vector2, out num);
@@ -427,21 +427,21 @@ namespace PseudoGameEngine.math
         public static void CreateConstrainedBillboard(ref Vector3 objectPosition, ref Vector3 cameraPosition,
             ref Vector3 rotateAxis, Vector3? cameraForwardVector, Vector3? objectForwardVector, out Matrix result)
         {
-            double num;
+            float num;
             Vector3 vector;
             Vector3 vector2;
             Vector3 vector3;
             vector2.X = objectPosition.X - cameraPosition.X;
             vector2.Y = objectPosition.Y - cameraPosition.Y;
             vector2.Z = objectPosition.Z - cameraPosition.Z;
-            double num2 = vector2.LengthSquared();
+            float num2 = vector2.LengthSquared();
             if (num2 < 0.0001f)
             {
                 vector2 = cameraForwardVector.HasValue ? -cameraForwardVector.Value : Vector3.Forward;
             }
             else
             {
-                Vector3.Multiply(ref vector2, (double)(1f / ((double)Math.Sqrt((double)num2))), out vector2);
+                Vector3.Multiply(ref vector2, (float)(1f / ((float)Math.Sqrt((float)num2))), out vector2);
             }
             Vector3 vector4 = rotateAxis;
             Vector3.Dot(ref rotateAxis, ref vector2, out num);
@@ -494,20 +494,20 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreateFromAxisAngle(Vector3 axis, double angle)
+        public static Matrix CreateFromAxisAngle(Vector3 axis, float angle)
         {
             Matrix matrix;
-            double x = axis.X;
-            double y = axis.Y;
-            double z = axis.Z;
-            double num2 = (double)Math.Sin((double)angle);
-            double num = (double)Math.Cos((double)angle);
-            double num11 = x * x;
-            double num10 = y * y;
-            double num9 = z * z;
-            double num8 = x * y;
-            double num7 = x * z;
-            double num6 = y * z;
+            float x = axis.X;
+            float y = axis.Y;
+            float z = axis.Z;
+            float num2 = (float)Math.Sin((float)angle);
+            float num = (float)Math.Cos((float)angle);
+            float num11 = x * x;
+            float num10 = y * y;
+            float num9 = z * z;
+            float num8 = x * y;
+            float num7 = x * z;
+            float num6 = y * z;
             matrix.M11 = num11 + (num * (1f - num11));
             matrix.M12 = (num8 - (num * num8)) + (num2 * z);
             matrix.M13 = (num7 - (num * num7)) - (num2 * y);
@@ -529,19 +529,19 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateFromAxisAngle(ref Vector3 axis, double angle, out Matrix result)
+        public static void CreateFromAxisAngle(ref Vector3 axis, float angle, out Matrix result)
         {
-            double x = axis.X;
-            double y = axis.Y;
-            double z = axis.Z;
-            double num2 = (double)Math.Sin((double)angle);
-            double num = (double)Math.Cos((double)angle);
-            double num11 = x * x;
-            double num10 = y * y;
-            double num9 = z * z;
-            double num8 = x * y;
-            double num7 = x * z;
-            double num6 = y * z;
+            float x = axis.X;
+            float y = axis.Y;
+            float z = axis.Z;
+            float num2 = (float)Math.Sin((float)angle);
+            float num = (float)Math.Cos((float)angle);
+            float num11 = x * x;
+            float num10 = y * y;
+            float num9 = z * z;
+            float num8 = x * y;
+            float num7 = x * z;
+            float num6 = y * z;
             result.M11 = num11 + (num * (1f - num11));
             result.M12 = (num8 - (num * num8)) + (num2 * z);
             result.M13 = (num7 - (num * num7)) - (num2 * y);
@@ -564,15 +564,15 @@ namespace PseudoGameEngine.math
         public static Matrix CreateFromQuaternion(Quaternion quaternion)
         {
             Matrix matrix;
-            double num9 = quaternion.X * quaternion.X;
-            double num8 = quaternion.Y * quaternion.Y;
-            double num7 = quaternion.Z * quaternion.Z;
-            double num6 = quaternion.X * quaternion.Y;
-            double num5 = quaternion.Z * quaternion.W;
-            double num4 = quaternion.Z * quaternion.X;
-            double num3 = quaternion.Y * quaternion.W;
-            double num2 = quaternion.Y * quaternion.Z;
-            double num = quaternion.X * quaternion.W;
+            float num9 = (float)(quaternion.X * quaternion.X);
+            float num8 = (float)(quaternion.Y * quaternion.Y);
+            float num7 = (float)(quaternion.Z * quaternion.Z);
+            float num6 = (float)(quaternion.X * quaternion.Y);
+            float num5 = (float)(quaternion.Z * quaternion.W);
+            float num4 = (float)(quaternion.Z * quaternion.X);
+            float num3 = (float)(quaternion.Y * quaternion.W);
+            float num2 = (float)(quaternion.Y * quaternion.Z);
+            float num = (float)(quaternion.X * quaternion.W);
             matrix.M11 = 1f - (2f * (num8 + num7));
             matrix.M12 = 2f * (num6 + num5);
             matrix.M13 = 2f * (num4 - num3);
@@ -595,15 +595,15 @@ namespace PseudoGameEngine.math
 
         public static void CreateFromQuaternion(ref Quaternion quaternion, out Matrix result)
         {
-            double num9 = quaternion.X * quaternion.X;
-            double num8 = quaternion.Y * quaternion.Y;
-            double num7 = quaternion.Z * quaternion.Z;
-            double num6 = quaternion.X * quaternion.Y;
-            double num5 = quaternion.Z * quaternion.W;
-            double num4 = quaternion.Z * quaternion.X;
-            double num3 = quaternion.Y * quaternion.W;
-            double num2 = quaternion.Y * quaternion.Z;
-            double num = quaternion.X * quaternion.W;
+            float num9 = (float)(quaternion.X * quaternion.X);
+            float num8 = (float)(quaternion.Y * quaternion.Y);
+            float num7 = (float)(quaternion.Z * quaternion.Z);
+            float num6 = (float)(quaternion.X * quaternion.Y);
+            float num5 = (float)(quaternion.Z * quaternion.W);
+            float num4 = (float)(quaternion.Z * quaternion.X);
+            float num3 = (float)(quaternion.Y * quaternion.W);
+            float num2 = (float)(quaternion.Y * quaternion.Z);
+            float num = (float)(quaternion.X * quaternion.W);
             result.M11 = 1f - (2f * (num8 + num7));
             result.M12 = 2f * (num6 + num5);
             result.M13 = 2f * (num4 - num3);
@@ -622,7 +622,7 @@ namespace PseudoGameEngine.math
             result.M44 = 1f;
         }
 
-        public static Matrix CreateFromYawPitchRoll(double yaw, double pitch, double roll)
+        public static Matrix CreateFromYawPitchRoll(float yaw, float pitch, float roll)
         {
             Matrix matrix;
             Quaternion quaternion;
@@ -632,9 +632,9 @@ namespace PseudoGameEngine.math
         }
 
         public static void CreateFromYawPitchRoll(
-         double yaw,
-         double pitch,
-         double roll,
+         float yaw,
+         float pitch,
+         float roll,
          out Matrix result)
         {
             Quaternion quaternion;
@@ -660,9 +660,9 @@ namespace PseudoGameEngine.math
             matrix.M32 = vector1.Z;
             matrix.M33 = vector3_1.Z;
             matrix.M34 = 0.0f;
-            matrix.M41 = -Vector3.Dot(vector3_2, cameraPosition);
-            matrix.M42 = -Vector3.Dot(vector1, cameraPosition);
-            matrix.M43 = -Vector3.Dot(vector3_1, cameraPosition);
+            matrix.M41 = (float)-Vector3.Dot(vector3_2, cameraPosition);
+            matrix.M42 = (float)-Vector3.Dot(vector1, cameraPosition);
+            matrix.M43 = (float)-Vector3.Dot(vector3_1, cameraPosition);
             matrix.M44 = 1f;
             return matrix;
 
@@ -712,14 +712,14 @@ namespace PseudoGameEngine.math
             result.M32 = vector3.Z;
             result.M33 = vector.Z;
             result.M34 = 0f;
-            result.M41 = -Vector3.Dot(vector2, cameraPosition);
-            result.M42 = -Vector3.Dot(vector3, cameraPosition);
-            result.M43 = -Vector3.Dot(vector, cameraPosition);
+            result.M41 = (float)-Vector3.Dot(vector2, cameraPosition);
+            result.M42 = (float)-Vector3.Dot(vector3, cameraPosition);
+            result.M43 = (float)-Vector3.Dot(vector, cameraPosition);
             result.M44 = 1f;
         }
 
 
-        //public static Matrix CreateOrthographic(double left, double right, double bottom, double top, double near, double far)
+        //public static Matrix CreateOrthographic(float left, float right, float bottom, float top, float near, float far)
         //{
         //    Matrix matrix;
         //    matrix.M11 = 2f / (right-left);
@@ -736,7 +736,7 @@ namespace PseudoGameEngine.math
         //}
 
 
-        public static Matrix CreateOrthographic(double width, double height, double zNearPlane, double zFarPlane)
+        public static Matrix CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane)
         {
             Matrix matrix;  
             matrix.M11 = 2f / width;
@@ -752,7 +752,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateOrthographic(double width, double height, double zNearPlane, double zFarPlane, out Matrix result)
+        public static void CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane, out Matrix result)
         {
             result.M11 = 2f / width;
             result.M12 = result.M13 = result.M14 = 0f;
@@ -766,50 +766,50 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreateOrthographicOffCenter(double left, double right, double bottom, double top, double zNearPlane, double zFarPlane)
+        public static Matrix CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
         {
             Matrix matrix;
-            matrix.M11 = (double)(2.0 / ((double)right - (double)left));
+            matrix.M11 = (float)(2.0 / ((float)right - (float)left));
             matrix.M12 = 0.0f;
             matrix.M13 = 0.0f;
             matrix.M14 = 0.0f;
             matrix.M21 = 0.0f;
-            matrix.M22 = (double)(2.0 / ((double)top - (double)bottom));
+            matrix.M22 = (float)(2.0 / ((float)top - (float)bottom));
             matrix.M23 = 0.0f;
             matrix.M24 = 0.0f;
             matrix.M31 = 0.0f;
             matrix.M32 = 0.0f;
-            matrix.M33 = (double)(1.0 / ((double)zNearPlane - (double)zFarPlane));
+            matrix.M33 = (float)(1.0 / ((float)zNearPlane - (float)zFarPlane));
             matrix.M34 = 0.0f;
-            matrix.M41 = (double)(((double)left + (double)right) / ((double)left - (double)right));
-            matrix.M42 = (double)(((double)top + (double)bottom) / ((double)bottom - (double)top));
-            matrix.M43 = (double)((double)zNearPlane / ((double)zNearPlane - (double)zFarPlane));
+            matrix.M41 = (float)(((float)left + (float)right) / ((float)left - (float)right));
+            matrix.M42 = (float)(((float)top + (float)bottom) / ((float)bottom - (float)top));
+            matrix.M43 = (float)((float)zNearPlane / ((float)zNearPlane - (float)zFarPlane));
             matrix.M44 = 1.0f;
             return matrix;
         }
 
 
-        public static void CreateOrthographicOffCenter(double left, double right, double bottom, double top, double zNearPlane, double zFarPlane, out Matrix result)
+        public static void CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane, out Matrix result)
         {
-            result.M11 = (double)(2.0 / ((double)right - (double)left));
+            result.M11 = (float)(2.0 / ((float)right - (float)left));
             result.M12 = 0.0f;
             result.M13 = 0.0f;
             result.M14 = 0.0f;
             result.M21 = 0.0f;
-            result.M22 = (double)(2.0 / ((double)top - (double)bottom));
+            result.M22 = (float)(2.0 / ((float)top - (float)bottom));
             result.M23 = 0.0f;
             result.M24 = 0.0f;
             result.M31 = 0.0f;
             result.M32 = 0.0f;
-            result.M33 = (double)(1.0 / ((double)zNearPlane - (double)zFarPlane));
+            result.M33 = (float)(1.0 / ((float)zNearPlane - (float)zFarPlane));
             result.M34 = 0.0f;
-            result.M41 = (double)(((double)left + (double)right) / ((double)left - (double)right));
-            result.M42 = (double)(((double)top + (double)bottom) / ((double)bottom - (double)top));
-            result.M43 = (double)((double)zNearPlane / ((double)zNearPlane - (double)zFarPlane));
+            result.M41 = (float)(((float)left + (float)right) / ((float)left - (float)right));
+            result.M42 = (float)(((float)top + (float)bottom) / ((float)bottom - (float)top));
+            result.M43 = (float)((float)zNearPlane / ((float)zNearPlane - (float)zFarPlane));
             result.M44 = 1.0f;
         }
 
-        public static Matrix CreatePerspective(double width, double height, double nearPlaneDistance, double farPlaneDistance)
+        public static Matrix CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance)
         {
             Matrix matrix;
             if (nearPlaneDistance <= 0f)
@@ -837,7 +837,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreatePerspective(double width, double height, double nearPlaneDistance, double farPlaneDistance, out Matrix result)
+        public static void CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance, out Matrix result)
         {
             if (nearPlaneDistance <= 0f)
             {
@@ -863,7 +863,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreatePerspectiveFieldOfView(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance)
+        public static Matrix CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
         {
             Matrix matrix;
             if ((fieldOfView <= 0f) || (fieldOfView >= 3.141593f))
@@ -882,8 +882,8 @@ namespace PseudoGameEngine.math
             {
                 throw new ArgumentException("nearPlaneDistance >= farPlaneDistance");
             }
-            double num = 1f / ((double)Math.Tan((double)(fieldOfView * 0.5f)));
-            double num9 = num / aspectRatio;
+            float num = 1f / ((float)Math.Tan((float)(fieldOfView * 0.5f)));
+            float num9 = num / aspectRatio;
             matrix.M11 = num9;
             matrix.M12 = matrix.M13 = matrix.M14 = 0f;
             matrix.M22 = num;
@@ -897,7 +897,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreatePerspectiveFieldOfView(double fieldOfView, double aspectRatio, double nearPlaneDistance, double farPlaneDistance, out Matrix result)
+        public static void CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance, out Matrix result)
         {
             if ((fieldOfView <= 0f) || (fieldOfView >= 3.141593f))
             {
@@ -915,8 +915,8 @@ namespace PseudoGameEngine.math
             {
                 throw new ArgumentException("nearPlaneDistance >= farPlaneDistance");
             }
-            double num = 1f / ((double)Math.Tan((double)(fieldOfView * 0.5f)));
-            double num9 = num / aspectRatio;
+            float num = 1f / ((float)Math.Tan((float)(fieldOfView * 0.5f)));
+            float num9 = num / aspectRatio;
             result.M11 = num9;
             result.M12 = result.M13 = result.M14 = 0f;
             result.M22 = num;
@@ -929,7 +929,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreatePerspectiveOffCenter(double left, double right, double bottom, double top, double nearPlaneDistance, double farPlaneDistance)
+        public static Matrix CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
         {
             Matrix matrix;
             if (nearPlaneDistance <= 0f)
@@ -958,7 +958,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreatePerspectiveOffCenter(double left, double right, double bottom, double top, double nearPlaneDistance, double farPlaneDistance, out Matrix result)
+        public static void CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance, out Matrix result)
         {
             if (nearPlaneDistance <= 0f)
             {
@@ -985,12 +985,12 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreateRotationX(double radians)
+        public static Matrix CreateRotationX(float radians)
         {
             Matrix returnMatrix = Matrix.Identity;
 
-            var val1 = (double)Math.Cos(radians);
-            var val2 = (double)Math.Sin(radians);
+            var val1 = (float)Math.Cos(radians);
+            var val2 = (float)Math.Sin(radians);
 
             returnMatrix.M22 = val1;
             returnMatrix.M23 = val2;
@@ -1002,12 +1002,12 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateRotationX(double radians, out Matrix result)
+        public static void CreateRotationX(float radians, out Matrix result)
         {
             result = Matrix.Identity;
 
-            var val1 = (double)Math.Cos(radians);
-            var val2 = (double)Math.Sin(radians);
+            var val1 = (float)Math.Cos(radians);
+            var val2 = (float)Math.Sin(radians);
 
             result.M22 = val1;
             result.M23 = val2;
@@ -1015,12 +1015,12 @@ namespace PseudoGameEngine.math
             result.M33 = val1;
         }
 
-        public static Matrix CreateRotationY(double radians)
+        public static Matrix CreateRotationY(float radians)
         {
             Matrix returnMatrix = Matrix.Identity;
 
-            var val1 = (double)Math.Cos(radians);
-            var val2 = (double)Math.Sin(radians);
+            var val1 = (float)Math.Cos(radians);
+            var val2 = (float)Math.Sin(radians);
 
             returnMatrix.M11 = val1;
             returnMatrix.M13 = -val2;
@@ -1031,12 +1031,12 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateRotationY(double radians, out Matrix result)
+        public static void CreateRotationY(float radians, out Matrix result)
         {
             result = Matrix.Identity;
 
-            var val1 = (double)Math.Cos(radians);
-            var val2 = (double)Math.Sin(radians);
+            var val1 = (float)Math.Cos(radians);
+            var val2 = (float)Math.Sin(radians);
 
             result.M11 = val1;
             result.M13 = -val2;
@@ -1045,12 +1045,12 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreateRotationZ(double radians)
+        public static Matrix CreateRotationZ(float radians)
         {
             Matrix returnMatrix = Matrix.Identity;
 
-            var val1 = (double)Math.Cos(radians);
-            var val2 = (double)Math.Sin(radians);
+            var val1 = (float)Math.Cos(radians);
+            var val2 = (float)Math.Sin(radians);
 
             returnMatrix.M11 = val1;
             returnMatrix.M12 = val2;
@@ -1061,12 +1061,12 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateRotationZ(double radians, out Matrix result)
+        public static void CreateRotationZ(float radians, out Matrix result)
         {
             result = Matrix.Identity;
 
-            var val1 = (double)Math.Cos(radians);
-            var val2 = (double)Math.Sin(radians);
+            var val1 = (float)Math.Cos(radians);
+            var val2 = (float)Math.Sin(radians);
 
             result.M11 = val1;
             result.M12 = val2;
@@ -1075,7 +1075,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreateScale(double scale)
+        public static Matrix CreateScale(float scale)
         {
             Matrix result;
             result.M11 = scale;
@@ -1098,7 +1098,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateScale(double scale, out Matrix result)
+        public static void CreateScale(float scale, out Matrix result)
         {
             result.M11 = scale;
             result.M12 = 0;
@@ -1119,7 +1119,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix CreateScale(double xScale, double yScale, double zScale)
+        public static Matrix CreateScale(float xScale, float yScale, float zScale)
         {
             Matrix result;
             result.M11 = xScale;
@@ -1142,7 +1142,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateScale(double xScale, double yScale, double zScale, out Matrix result)
+        public static void CreateScale(float xScale, float yScale, float zScale, out Matrix result)
         {
             result.M11 = xScale;
             result.M12 = 0;
@@ -1206,7 +1206,7 @@ namespace PseudoGameEngine.math
             result.M44 = 1;
         }
 
-        public static Matrix CreateTranslation(double xPosition, double yPosition, double zPosition)
+        public static Matrix CreateTranslation(float xPosition, float yPosition, float zPosition)
         {
             Matrix result;
             result.M11 = 1;
@@ -1273,7 +1273,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void CreateTranslation(double xPosition, double yPosition, double zPosition, out Matrix result)
+        public static void CreateTranslation(float xPosition, float yPosition, float zPosition, out Matrix result)
         {
             result.M11 = 1;
             result.M12 = 0;
@@ -1318,30 +1318,30 @@ namespace PseudoGameEngine.math
             result.M44 = 1f;
         }
 
-        public double Determinant()
+        public float Determinant()
         {
-            double num22 = this.M11;
-            double num21 = this.M12;
-            double num20 = this.M13;
-            double num19 = this.M14;
-            double num12 = this.M21;
-            double num11 = this.M22;
-            double num10 = this.M23;
-            double num9 = this.M24;
-            double num8 = this.M31;
-            double num7 = this.M32;
-            double num6 = this.M33;
-            double num5 = this.M34;
-            double num4 = this.M41;
-            double num3 = this.M42;
-            double num2 = this.M43;
-            double num = this.M44;
-            double num18 = (num6 * num) - (num5 * num2);
-            double num17 = (num7 * num) - (num5 * num3);
-            double num16 = (num7 * num2) - (num6 * num3);
-            double num15 = (num8 * num) - (num5 * num4);
-            double num14 = (num8 * num2) - (num6 * num4);
-            double num13 = (num8 * num3) - (num7 * num4);
+            float num22 = this.M11;
+            float num21 = this.M12;
+            float num20 = this.M13;
+            float num19 = this.M14;
+            float num12 = this.M21;
+            float num11 = this.M22;
+            float num10 = this.M23;
+            float num9 = this.M24;
+            float num8 = this.M31;
+            float num7 = this.M32;
+            float num6 = this.M33;
+            float num5 = this.M34;
+            float num4 = this.M41;
+            float num3 = this.M42;
+            float num2 = this.M43;
+            float num = this.M44;
+            float num18 = (num6 * num) - (num5 * num2);
+            float num17 = (num7 * num) - (num5 * num3);
+            float num16 = (num7 * num2) - (num6 * num3);
+            float num15 = (num8 * num) - (num5 * num4);
+            float num14 = (num8 * num2) - (num6 * num4);
+            float num13 = (num8 * num3) - (num7 * num4);
             return ((((num22 * (((num11 * num18) - (num10 * num17)) + (num9 * num16))) - (num21 * (((num12 * num18) - (num10 * num15)) + (num9 * num14)))) + (num20 * (((num12 * num17) - (num11 * num15)) + (num9 * num13)))) - (num19 * (((num12 * num16) - (num11 * num14)) + (num10 * num13))));
         }
 
@@ -1389,9 +1389,9 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix Divide(Matrix matrix1, double divider)
+        public static Matrix Divide(Matrix matrix1, float divider)
         {
-            double num = 1f / divider;
+            float num = 1f / divider;
             matrix1.M11 = matrix1.M11 * num;
             matrix1.M12 = matrix1.M12 * num;
             matrix1.M13 = matrix1.M13 * num;
@@ -1412,9 +1412,9 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void Divide(ref Matrix matrix1, double divider, out Matrix result)
+        public static void Divide(ref Matrix matrix1, float divider, out Matrix result)
         {
-            double num = 1f / divider;
+            float num = 1f / divider;
             result.M11 = matrix1.M11 * num;
             result.M12 = matrix1.M12 * num;
             result.M13 = matrix1.M13 * num;
@@ -1466,62 +1466,62 @@ namespace PseudoGameEngine.math
 
         public static void Invert(ref Matrix matrix, out Matrix result)
         {
-            double num1 = matrix.M11;
-            double num2 = matrix.M12;
-            double num3 = matrix.M13;
-            double num4 = matrix.M14;
-            double num5 = matrix.M21;
-            double num6 = matrix.M22;
-            double num7 = matrix.M23;
-            double num8 = matrix.M24;
-            double num9 = matrix.M31;
-            double num10 = matrix.M32;
-            double num11 = matrix.M33;
-            double num12 = matrix.M34;
-            double num13 = matrix.M41;
-            double num14 = matrix.M42;
-            double num15 = matrix.M43;
-            double num16 = matrix.M44;
-            double num17 = (double)((double)num11 * (double)num16 - (double)num12 * (double)num15);
-            double num18 = (double)((double)num10 * (double)num16 - (double)num12 * (double)num14);
-            double num19 = (double)((double)num10 * (double)num15 - (double)num11 * (double)num14);
-            double num20 = (double)((double)num9 * (double)num16 - (double)num12 * (double)num13);
-            double num21 = (double)((double)num9 * (double)num15 - (double)num11 * (double)num13);
-            double num22 = (double)((double)num9 * (double)num14 - (double)num10 * (double)num13);
-            double num23 = (double)((double)num6 * (double)num17 - (double)num7 * (double)num18 + (double)num8 * (double)num19);
-            double num24 = (double)-((double)num5 * (double)num17 - (double)num7 * (double)num20 + (double)num8 * (double)num21);
-            double num25 = (double)((double)num5 * (double)num18 - (double)num6 * (double)num20 + (double)num8 * (double)num22);
-            double num26 = (double)-((double)num5 * (double)num19 - (double)num6 * (double)num21 + (double)num7 * (double)num22);
-            double num27 = (double)(1.0 / ((double)num1 * (double)num23 + (double)num2 * (double)num24 + (double)num3 * (double)num25 + (double)num4 * (double)num26));
+            float num1 = matrix.M11;
+            float num2 = matrix.M12;
+            float num3 = matrix.M13;
+            float num4 = matrix.M14;
+            float num5 = matrix.M21;
+            float num6 = matrix.M22;
+            float num7 = matrix.M23;
+            float num8 = matrix.M24;
+            float num9 = matrix.M31;
+            float num10 = matrix.M32;
+            float num11 = matrix.M33;
+            float num12 = matrix.M34;
+            float num13 = matrix.M41;
+            float num14 = matrix.M42;
+            float num15 = matrix.M43;
+            float num16 = matrix.M44;
+            float num17 = (float)((float)num11 * (float)num16 - (float)num12 * (float)num15);
+            float num18 = (float)((float)num10 * (float)num16 - (float)num12 * (float)num14);
+            float num19 = (float)((float)num10 * (float)num15 - (float)num11 * (float)num14);
+            float num20 = (float)((float)num9 * (float)num16 - (float)num12 * (float)num13);
+            float num21 = (float)((float)num9 * (float)num15 - (float)num11 * (float)num13);
+            float num22 = (float)((float)num9 * (float)num14 - (float)num10 * (float)num13);
+            float num23 = (float)((float)num6 * (float)num17 - (float)num7 * (float)num18 + (float)num8 * (float)num19);
+            float num24 = (float)-((float)num5 * (float)num17 - (float)num7 * (float)num20 + (float)num8 * (float)num21);
+            float num25 = (float)((float)num5 * (float)num18 - (float)num6 * (float)num20 + (float)num8 * (float)num22);
+            float num26 = (float)-((float)num5 * (float)num19 - (float)num6 * (float)num21 + (float)num7 * (float)num22);
+            float num27 = (float)(1.0 / ((float)num1 * (float)num23 + (float)num2 * (float)num24 + (float)num3 * (float)num25 + (float)num4 * (float)num26));
 
             result.M11 = num23 * num27;
             result.M21 = num24 * num27;
             result.M31 = num25 * num27;
             result.M41 = num26 * num27;
-            result.M12 = (double)-((double)num2 * (double)num17 - (double)num3 * (double)num18 + (double)num4 * (double)num19) * num27;
-            result.M22 = (double)((double)num1 * (double)num17 - (double)num3 * (double)num20 + (double)num4 * (double)num21) * num27;
-            result.M32 = (double)-((double)num1 * (double)num18 - (double)num2 * (double)num20 + (double)num4 * (double)num22) * num27;
-            result.M42 = (double)((double)num1 * (double)num19 - (double)num2 * (double)num21 + (double)num3 * (double)num22) * num27;
-            double num28 = (double)((double)num7 * (double)num16 - (double)num8 * (double)num15);
-            double num29 = (double)((double)num6 * (double)num16 - (double)num8 * (double)num14);
-            double num30 = (double)((double)num6 * (double)num15 - (double)num7 * (double)num14);
-            double num31 = (double)((double)num5 * (double)num16 - (double)num8 * (double)num13);
-            double num32 = (double)((double)num5 * (double)num15 - (double)num7 * (double)num13);
-            double num33 = (double)((double)num5 * (double)num14 - (double)num6 * (double)num13);
-            result.M13 = (double)((double)num2 * (double)num28 - (double)num3 * (double)num29 + (double)num4 * (double)num30) * num27;
-            result.M23 = (double)-((double)num1 * (double)num28 - (double)num3 * (double)num31 + (double)num4 * (double)num32) * num27;
-            result.M33 = (double)((double)num1 * (double)num29 - (double)num2 * (double)num31 + (double)num4 * (double)num33) * num27;
-            result.M43 = (double)-((double)num1 * (double)num30 - (double)num2 * (double)num32 + (double)num3 * (double)num33) * num27;
-            double num34 = (double)((double)num7 * (double)num12 - (double)num8 * (double)num11);
-            double num35 = (double)((double)num6 * (double)num12 - (double)num8 * (double)num10);
-            double num36 = (double)((double)num6 * (double)num11 - (double)num7 * (double)num10);
-            double num37 = (double)((double)num5 * (double)num12 - (double)num8 * (double)num9);
-            double num38 = (double)((double)num5 * (double)num11 - (double)num7 * (double)num9);
-            double num39 = (double)((double)num5 * (double)num10 - (double)num6 * (double)num9);
-            result.M14 = (double)-((double)num2 * (double)num34 - (double)num3 * (double)num35 + (double)num4 * (double)num36) * num27;
-            result.M24 = (double)((double)num1 * (double)num34 - (double)num3 * (double)num37 + (double)num4 * (double)num38) * num27;
-            result.M34 = (double)-((double)num1 * (double)num35 - (double)num2 * (double)num37 + (double)num4 * (double)num39) * num27;
-            result.M44 = (double)((double)num1 * (double)num36 - (double)num2 * (double)num38 + (double)num3 * (double)num39) * num27;
+            result.M12 = (float)-((float)num2 * (float)num17 - (float)num3 * (float)num18 + (float)num4 * (float)num19) * num27;
+            result.M22 = (float)((float)num1 * (float)num17 - (float)num3 * (float)num20 + (float)num4 * (float)num21) * num27;
+            result.M32 = (float)-((float)num1 * (float)num18 - (float)num2 * (float)num20 + (float)num4 * (float)num22) * num27;
+            result.M42 = (float)((float)num1 * (float)num19 - (float)num2 * (float)num21 + (float)num3 * (float)num22) * num27;
+            float num28 = (float)((float)num7 * (float)num16 - (float)num8 * (float)num15);
+            float num29 = (float)((float)num6 * (float)num16 - (float)num8 * (float)num14);
+            float num30 = (float)((float)num6 * (float)num15 - (float)num7 * (float)num14);
+            float num31 = (float)((float)num5 * (float)num16 - (float)num8 * (float)num13);
+            float num32 = (float)((float)num5 * (float)num15 - (float)num7 * (float)num13);
+            float num33 = (float)((float)num5 * (float)num14 - (float)num6 * (float)num13);
+            result.M13 = (float)((float)num2 * (float)num28 - (float)num3 * (float)num29 + (float)num4 * (float)num30) * num27;
+            result.M23 = (float)-((float)num1 * (float)num28 - (float)num3 * (float)num31 + (float)num4 * (float)num32) * num27;
+            result.M33 = (float)((float)num1 * (float)num29 - (float)num2 * (float)num31 + (float)num4 * (float)num33) * num27;
+            result.M43 = (float)-((float)num1 * (float)num30 - (float)num2 * (float)num32 + (float)num3 * (float)num33) * num27;
+            float num34 = (float)((float)num7 * (float)num12 - (float)num8 * (float)num11);
+            float num35 = (float)((float)num6 * (float)num12 - (float)num8 * (float)num10);
+            float num36 = (float)((float)num6 * (float)num11 - (float)num7 * (float)num10);
+            float num37 = (float)((float)num5 * (float)num12 - (float)num8 * (float)num9);
+            float num38 = (float)((float)num5 * (float)num11 - (float)num7 * (float)num9);
+            float num39 = (float)((float)num5 * (float)num10 - (float)num6 * (float)num9);
+            result.M14 = (float)-((float)num2 * (float)num34 - (float)num3 * (float)num35 + (float)num4 * (float)num36) * num27;
+            result.M24 = (float)((float)num1 * (float)num34 - (float)num3 * (float)num37 + (float)num4 * (float)num38) * num27;
+            result.M34 = (float)-((float)num1 * (float)num35 - (float)num2 * (float)num37 + (float)num4 * (float)num39) * num27;
+            result.M44 = (float)((float)num1 * (float)num36 - (float)num2 * (float)num38 + (float)num3 * (float)num39) * num27;
 
 
             /*
@@ -1534,12 +1534,12 @@ namespace PseudoGameEngine.math
             // 3. Create the adjugate matrix, which satisfies: A * adj(A) = det(A) * I
             // 4. Divide adjugate matrix with the determinant to find the inverse
             
-            double det1, det2, det3, det4, det5, det6, det7, det8, det9, det10, det11, det12;
-            double detMatrix;
+            float det1, det2, det3, det4, det5, det6, det7, det8, det9, det10, det11, det12;
+            float detMatrix;
             findDeterminants(ref matrix, out detMatrix, out det1, out det2, out det3, out det4, out det5, out det6, 
                              out det7, out det8, out det9, out det10, out det11, out det12);
             
-            double invDetMatrix = 1f / detMatrix;
+            float invDetMatrix = 1f / detMatrix;
             
             Matrix ret; // Allow for matrix and result to point to the same structure
             
@@ -1565,7 +1565,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix Lerp(Matrix matrix1, Matrix matrix2, double amount)
+        public static Matrix Lerp(Matrix matrix1, Matrix matrix2, float amount)
         {
             matrix1.M11 = matrix1.M11 + ((matrix2.M11 - matrix1.M11) * amount);
             matrix1.M12 = matrix1.M12 + ((matrix2.M12 - matrix1.M12) * amount);
@@ -1587,7 +1587,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void Lerp(ref Matrix matrix1, ref Matrix matrix2, double amount, out Matrix result)
+        public static void Lerp(ref Matrix matrix1, ref Matrix matrix2, float amount, out Matrix result)
         {
             result.M11 = matrix1.M11 + ((matrix2.M11 - matrix1.M11) * amount);
             result.M12 = matrix1.M12 + ((matrix2.M12 - matrix1.M12) * amount);
@@ -1681,7 +1681,7 @@ namespace PseudoGameEngine.math
             result.M44 = m44;
         }
 
-        public static Matrix Multiply(Matrix matrix1, double factor)
+        public static Matrix Multiply(Matrix matrix1, float factor)
         {
             matrix1.M11 *= factor;
             matrix1.M12 *= factor;
@@ -1703,7 +1703,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static void Multiply(ref Matrix matrix1, double factor, out Matrix result)
+        public static void Multiply(ref Matrix matrix1, float factor, out Matrix result)
         {
             result.M11 = matrix1.M11 * factor;
             result.M12 = matrix1.M12 * factor;
@@ -1797,9 +1797,9 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix operator /(Matrix matrix, double divider)
+        public static Matrix operator /(Matrix matrix, float divider)
         {
-            double num = 1f / divider;
+            float num = 1f / divider;
             matrix.M11 = matrix.M11 * num;
             matrix.M12 = matrix.M12 * num;
             matrix.M13 = matrix.M13 * num;
@@ -1904,7 +1904,7 @@ namespace PseudoGameEngine.math
         }
 
 
-        public static Matrix operator *(Matrix matrix, double scaleFactor)
+        public static Matrix operator *(Matrix matrix, float scaleFactor)
         {
             matrix.M11 = matrix.M11 * scaleFactor;
             matrix.M12 = matrix.M12 * scaleFactor;
@@ -2060,36 +2060,36 @@ namespace PseudoGameEngine.math
         /// Helper method for using the Laplace expansion theorem using two rows expansions to calculate major and 
         /// minor determinants of a 4x4 matrix. This method is used for inverting a matrix.
         /// </summary>
-        private static void findDeterminants(ref Matrix matrix, out double major,
-                                             out double minor1, out double minor2, out double minor3, out double minor4, out double minor5, out double minor6,
-                                             out double minor7, out double minor8, out double minor9, out double minor10, out double minor11, out double minor12)
+        private static void findDeterminants(ref Matrix matrix, out float major,
+                                             out float minor1, out float minor2, out float minor3, out float minor4, out float minor5, out float minor6,
+                                             out float minor7, out float minor8, out float minor9, out float minor10, out float minor11, out float minor12)
         {
-            double det1 = (double)matrix.M11 * (double)matrix.M22 - (double)matrix.M12 * (double)matrix.M21;
-            double det2 = (double)matrix.M11 * (double)matrix.M23 - (double)matrix.M13 * (double)matrix.M21;
-            double det3 = (double)matrix.M11 * (double)matrix.M24 - (double)matrix.M14 * (double)matrix.M21;
-            double det4 = (double)matrix.M12 * (double)matrix.M23 - (double)matrix.M13 * (double)matrix.M22;
-            double det5 = (double)matrix.M12 * (double)matrix.M24 - (double)matrix.M14 * (double)matrix.M22;
-            double det6 = (double)matrix.M13 * (double)matrix.M24 - (double)matrix.M14 * (double)matrix.M23;
-            double det7 = (double)matrix.M31 * (double)matrix.M42 - (double)matrix.M32 * (double)matrix.M41;
-            double det8 = (double)matrix.M31 * (double)matrix.M43 - (double)matrix.M33 * (double)matrix.M41;
-            double det9 = (double)matrix.M31 * (double)matrix.M44 - (double)matrix.M34 * (double)matrix.M41;
-            double det10 = (double)matrix.M32 * (double)matrix.M43 - (double)matrix.M33 * (double)matrix.M42;
-            double det11 = (double)matrix.M32 * (double)matrix.M44 - (double)matrix.M34 * (double)matrix.M42;
-            double det12 = (double)matrix.M33 * (double)matrix.M44 - (double)matrix.M34 * (double)matrix.M43;
+            float det1 = (float)matrix.M11 * (float)matrix.M22 - (float)matrix.M12 * (float)matrix.M21;
+            float det2 = (float)matrix.M11 * (float)matrix.M23 - (float)matrix.M13 * (float)matrix.M21;
+            float det3 = (float)matrix.M11 * (float)matrix.M24 - (float)matrix.M14 * (float)matrix.M21;
+            float det4 = (float)matrix.M12 * (float)matrix.M23 - (float)matrix.M13 * (float)matrix.M22;
+            float det5 = (float)matrix.M12 * (float)matrix.M24 - (float)matrix.M14 * (float)matrix.M22;
+            float det6 = (float)matrix.M13 * (float)matrix.M24 - (float)matrix.M14 * (float)matrix.M23;
+            float det7 = (float)matrix.M31 * (float)matrix.M42 - (float)matrix.M32 * (float)matrix.M41;
+            float det8 = (float)matrix.M31 * (float)matrix.M43 - (float)matrix.M33 * (float)matrix.M41;
+            float det9 = (float)matrix.M31 * (float)matrix.M44 - (float)matrix.M34 * (float)matrix.M41;
+            float det10 = (float)matrix.M32 * (float)matrix.M43 - (float)matrix.M33 * (float)matrix.M42;
+            float det11 = (float)matrix.M32 * (float)matrix.M44 - (float)matrix.M34 * (float)matrix.M42;
+            float det12 = (float)matrix.M33 * (float)matrix.M44 - (float)matrix.M34 * (float)matrix.M43;
 
-            major = (double)(det1 * det12 - det2 * det11 + det3 * det10 + det4 * det9 - det5 * det8 + det6 * det7);
-            minor1 = (double)det1;
-            minor2 = (double)det2;
-            minor3 = (double)det3;
-            minor4 = (double)det4;
-            minor5 = (double)det5;
-            minor6 = (double)det6;
-            minor7 = (double)det7;
-            minor8 = (double)det8;
-            minor9 = (double)det9;
-            minor10 = (double)det10;
-            minor11 = (double)det11;
-            minor12 = (double)det12;
+            major = (float)(det1 * det12 - det2 * det11 + det3 * det10 + det4 * det9 - det5 * det8 + det6 * det7);
+            minor1 = (float)det1;
+            minor2 = (float)det2;
+            minor3 = (float)det3;
+            minor4 = (float)det4;
+            minor5 = (float)det5;
+            minor6 = (float)det6;
+            minor7 = (float)det7;
+            minor8 = (float)det8;
+            minor9 = (float)det9;
+            minor10 = (float)det10;
+            minor11 = (float)det11;
+            minor12 = (float)det12;
         }
 
         #endregion Private Static Methods
@@ -2100,13 +2100,13 @@ namespace PseudoGameEngine.math
             translation.Y = this.M42;
             translation.Z = this.M43;
 
-            double xs = (Math.Sign(M11 * M12 * M13 * M14) < 0) ? -1f : 1f;
-            double ys = (Math.Sign(M21 * M22 * M23 * M24) < 0) ? -1f : 1f;
-            double zs = (Math.Sign(M31 * M32 * M33 * M34) < 0) ? -1f : 1f;
+            float xs = (Math.Sign(M11 * M12 * M13 * M14) < 0) ? -1f : 1f;
+            float ys = (Math.Sign(M21 * M22 * M23 * M24) < 0) ? -1f : 1f;
+            float zs = (Math.Sign(M31 * M32 * M33 * M34) < 0) ? -1f : 1f;
 
-            scale.X = xs * (double)Math.Sqrt(this.M11 * this.M11 + this.M12 * this.M12 + this.M13 * this.M13);
-            scale.Y = ys * (double)Math.Sqrt(this.M21 * this.M21 + this.M22 * this.M22 + this.M23 * this.M23);
-            scale.Z = zs * (double)Math.Sqrt(this.M31 * this.M31 + this.M32 * this.M32 + this.M33 * this.M33);
+            scale.X = xs * (float)Math.Sqrt(this.M11 * this.M11 + this.M12 * this.M12 + this.M13 * this.M13);
+            scale.Y = ys * (float)Math.Sqrt(this.M21 * this.M21 + this.M22 * this.M22 + this.M23 * this.M23);
+            scale.Z = zs * (float)Math.Sqrt(this.M31 * this.M31 + this.M32 * this.M32 + this.M33 * this.M33);
 
             if (scale.X == 0.0 || scale.Y == 0.0 || scale.Z == 0.0)
             {

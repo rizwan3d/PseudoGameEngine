@@ -130,6 +130,11 @@ namespace PseudoGameEngine.graphics
         {
             gl.DeleteProgram(m_shaderID);
         }
+        ~shader()
+        {
+            delete();
+        }
+
         public void enable()
         {
             //enable shaders           

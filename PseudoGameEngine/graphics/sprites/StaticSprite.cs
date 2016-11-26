@@ -53,6 +53,11 @@ namespace PseudoGameEngine.graphics
             _vertexarray.delete();
             _indexbuffer.delete();
         }
+        ~StaticSprite()
+        {
+            delete();
+        }
+
 
     }
 }

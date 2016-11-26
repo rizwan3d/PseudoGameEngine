@@ -42,14 +42,15 @@ namespace SharpGL
             if (extensionFunctions.TryGetValue(name, out del) == false)
             {
                 IntPtr proc = Win32.wglGetProcAddress(name);
-                if (proc == IntPtr.Zero)
-                    throw new Exception("Extension function " + name + " not supported");
+                  if (proc == IntPtr.Zero)
+                   throw new Exception("Extension function " + name + " not supported");
 
                 //  Get the delegate for the function pointer.
-                del = Marshal.GetDelegateForFunctionPointer(proc, delegateType);
-
-                //  Add to the dictionary.
-                extensionFunctions.Add(name, del);
+               
+                    del = Marshal.GetDelegateForFunctionPointer(proc, delegateType);
+                    //  Add to the dictionary.
+                    extensionFunctions.Add(name, del);
+               
             }
 
             return del as T;

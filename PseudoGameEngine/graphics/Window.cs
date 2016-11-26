@@ -269,18 +269,25 @@ namespace PseudoGameEngine.graphics
 
         public void Quit()
         {
+            //Environment.Exit(0);
             isWindowOpened = false;
             // Delete our OpengL context
             SDL_GL_DeleteContext(glContext);
             //Destroy window
-            SDL_DestroyWindow(win);
+            //SDL_DestroyWindow(win);
             win = IntPtr.Zero;
             //Quit SDL subsystems
             SDL_Quit();
             Environment.Exit(0);
+
         }
 
-        public void ClearColor(Vector4 color)
+        ~Window()
+        {
+            Quit();
+        }
+
+    public void ClearColor(Vector4 color)
         {
             gl.ClearColor((float)color.X, (float)color.Y, (float)color.Z, (float)color.W);
         }

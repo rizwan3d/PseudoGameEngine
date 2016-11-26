@@ -47,13 +47,17 @@ namespace PseudoGameEngine.graphics
             foreach(VertexBufferArray b in Buffers)
             {
                Buffers.Remove(b);
-               uint[] a = new uint[2];
-               a[0] = b.VertexBufferArrayObject;
-               gl.DeleteBuffers(0, a);
+                b.Delete(gl);             
             }
+            
             uint[] c = new uint[2];
             c[0] = ArrayID;
-            gl.DeleteBuffers(0, c);
+            gl.DeleteVertexArrays(1, c);
+        }
+
+        ~VertexArray()
+        {
+            delete();
         }
         
 

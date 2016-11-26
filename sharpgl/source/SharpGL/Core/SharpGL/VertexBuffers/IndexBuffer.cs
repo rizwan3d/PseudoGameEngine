@@ -1,3 +1,6 @@
+using System.Runtime.InteropServices;
+using System;
+
 namespace SharpGL.VertexBuffers
 {
     public class IndexBuffer
@@ -13,6 +16,12 @@ namespace SharpGL.VertexBuffers
         public void SetData(OpenGL gl, ushort[] rawData)
         {
             gl.BufferData(OpenGL.GL_ELEMENT_ARRAY_BUFFER, rawData, OpenGL.GL_STATIC_DRAW);
+        }
+        public void SetData(OpenGL gl, int[] rawData, int Count)
+        {
+            IntPtr p = Marshal.AllocCoTaskMem(sizeof(int) * rawData.Length);
+            Marshal.Copy(rawData, 0, p, rawData.Length);
+            gl.BufferData(OpenGL.GL_ELEMENT_ARRAY_BUFFER, Marshal.SizeOf(p),p, OpenGL.GL_STATIC_DRAW);
         }
 
         public void Bind(OpenGL gl)

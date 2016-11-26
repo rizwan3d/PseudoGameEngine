@@ -851,38 +851,38 @@ namespace PseudoGameEngine.math
         {
 
             // source -> http://content.gpwiki.org/index.php/OpenGL:Tutorials:Using_Quaternions_to_represent_rotation#Quaternion_to_Matrix
-            double x2 = quaternion.X * quaternion.X;
-            double y2 = quaternion.Y * quaternion.Y;
-            double z2 = quaternion.Z * quaternion.Z;
-            double xy = quaternion.X * quaternion.Y;
-            double xz = quaternion.X * quaternion.Z;
-            double yz = quaternion.Y * quaternion.Z;
-            double wx = quaternion.W * quaternion.X;
-            double wy = quaternion.W * quaternion.Y;
-            double wz = quaternion.W * quaternion.Z;
+            double x2 = (float)(quaternion.X * quaternion.X);
+            double y2 = (float)(quaternion.Y * quaternion.Y);
+            double z2 = (float)(quaternion.Z * quaternion.Z);
+            double xy = (float)(quaternion.X * quaternion.Y);
+            double xz = (float)(quaternion.X * quaternion.Z);
+            double yz = (float)(quaternion.Y * quaternion.Z);
+            double wx = (float)(quaternion.W * quaternion.X);
+            double wy = (float)(quaternion.W * quaternion.Y);
+            double wz = (float)(quaternion.W * quaternion.Z);
 
             // This calculation would be a lot more complicated for non-unit length quaternions
             // Note: The constructor of Matrix4 expects the Matrix in column-major format like expected by
             //   OpenGL
-            matrix.M11 = 1.0f - 2.0f * (y2 + z2);
-            matrix.M12 = 2.0f * (xy - wz);
-            matrix.M13 = 2.0f * (xz + wy);
-            matrix.M14 = 0.0f;
-
-            matrix.M21 = 2.0f * (xy + wz);
-            matrix.M22 = 1.0f - 2.0f * (x2 + z2);
-            matrix.M23 = 2.0f * (yz - wx);
-            matrix.M24 = 0.0f;
-
-            matrix.M31 = 2.0f * (xz - wy);
-            matrix.M32 = 2.0f * (yz + wx);
-            matrix.M33 = 1.0f - 2.0f * (x2 + y2);
-            matrix.M34 = 0.0f;
-
-            matrix.M41 = 2.0f * (xz - wy);
-            matrix.M42 = 2.0f * (yz + wx);
-            matrix.M43 = 1.0f - 2.0f * (x2 + y2);
-            matrix.M44 = 0.0f;
+            matrix.M11 = (float)(1.0f - 2.0f * (y2 + z2));
+            matrix.M12 = (float)(2.0f * (xy - wz));
+            matrix.M13 = (float)(2.0f * (xz + wy));
+            matrix.M14 = (float)(0.0f);
+                         
+            matrix.M21 = (float)(2.0f * (xy + wz));
+            matrix.M22 = (float)(1.0f - 2.0f * (x2 + z2));
+            matrix.M23 = (float)(2.0f * (yz - wx));
+            matrix.M24 = (float)(0.0f);
+                        
+            matrix.M31 = (float)(2.0f * (xz - wy));
+            matrix.M32 = (float)(2.0f * (yz + wx));
+            matrix.M33 = (float)(1.0f - 2.0f * (x2 + y2));
+            matrix.M34 = (float)(0.0f);
+                       
+            matrix.M41 = (float)(2.0f * (xz - wy));
+            matrix.M42 = (float)(2.0f * (yz + wx));
+            matrix.M43 = (float)(1.0f - 2.0f * (x2 + y2));
+            matrix.M44 = (float)(0.0f);
 
             //return Matrix4( 1.0f - 2.0f * (y2 + z2), 2.0f * (xy - wz), 2.0f * (xz + wy), 0.0f,
             //        2.0f * (xy + wz), 1.0f - 2.0f * (x2 + z2), 2.0f * (yz - wx), 0.0f,
@@ -895,7 +895,7 @@ namespace PseudoGameEngine.math
         {
             get
             {
-                return new Vector3(X, Y, Z);
+                return new Vector3((float)X, (float)Y, (float)Z);
             }
 
             set

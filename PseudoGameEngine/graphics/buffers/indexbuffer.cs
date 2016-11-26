@@ -19,7 +19,17 @@ namespace PseudoGameEngine.graphics
             _indexbuffer.Unbind(gl);           
            
         }
-        
+        public indexbuffer(int[] data, int Count)
+        {
+            _indexbuffer = new SharpGL.VertexBuffers.IndexBuffer();
+            this.Count = (uint)Count;
+            _indexbuffer.Create(gl);
+            _indexbuffer.Bind(gl);
+            _indexbuffer.SetData(gl, data,Count);
+            _indexbuffer.Unbind(gl);
+
+        }
+
         public void bind()
         {
             _indexbuffer.Bind(gl);
@@ -38,6 +48,11 @@ namespace PseudoGameEngine.graphics
             uint[] a = new uint[2];
             a[0] = _indexbuffer.IndexBufferObject;
             gl.DeleteBuffers(0, a);
+        }
+
+        ~indexbuffer()
+        {
+            delete();
         }
     }
 }

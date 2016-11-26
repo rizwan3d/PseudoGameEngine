@@ -28,6 +28,11 @@ namespace PseudoGameEngine.graphics
             }
         }
 
+        ~Simple2DRenderer()
+        {
+            delete();
+        }
+
         public override void flush() {
 
             while(_RedererQueue.Count != 0) {
