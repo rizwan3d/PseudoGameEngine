@@ -11,7 +11,9 @@ namespace PseudoGameEngine.graphics
       //  readonly static uint SHADER_UV_INDEX = 1;
         readonly static uint SHADER_COLOR_INDEX = 1;
 
+#pragma warning disable CS0414 // The field 'BatchRenderer2D.SHADER_VERTEX_SIZE' is assigned but its value is never used
         readonly static int SHADER_VERTEX_SIZE = (3 * 4);
+#pragma warning restore CS0414 // The field 'BatchRenderer2D.SHADER_VERTEX_SIZE' is assigned but its value is never used
        // readonly static int SHADER_UV_SIZE = (2 * 4);
       //  readonly static int SHADER_COLOR_SIZE = (1 * 4);
 
@@ -56,7 +58,7 @@ namespace PseudoGameEngine.graphics
               
             gl.VertexAttribPointer(SHADER_VERTEX_INDEX, 3, OpenGL.GL_FLOAT, false,  RENDERER_VERTEX_SIZE, IntPtr.Zero);           
                                                                                                                               // gl.VertexAttribPointer(SHADER_UV_INDEX, 2, OpenGL.GL_FLOAT, false, RENDERER_VERTEX_SIZE,IntPtr.Zero )// new IntPtr(SHADER_VERTEX_SIZE));
-            gl.VertexAttribPointer(SHADER_COLOR_INDEX, 4, OpenGL.GL_FLOAT /*OpenGL.GL_UNSIGNED_BYTE*/, true, RENDERER_VERTEX_SIZE, new IntPtr(3 * sizeof(float)));//new IntPtr(SHADER_VERTEX_SIZE + SHADER_UV_SIZE));
+            gl.VertexAttribPointer(SHADER_COLOR_INDEX, 4, /*OpenGL.GL_FLOAT*/ OpenGL.GL_UNSIGNED_BYTE, true, RENDERER_VERTEX_SIZE, new IntPtr(Marshal.OffsetOf<VertexData>("color").ToInt32()/*3 * sizeof(float))*/));//new IntPtr(SHADER_VERTEX_SIZE + SHADER_UV_SIZE));
            
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
 
@@ -100,21 +102,27 @@ namespace PseudoGameEngine.graphics
             Vector4 color = renderable.GetColor();
             //List<vec2> uv = renderable.getUV();
 
+            int r = (int)(color.X * 255);
+            int g = (int)(color.Y * 255);
+            int b = (int)(color.Z * 255);
+            int a = (int)(color.W * 255);
+
+            int c = (r << 0) | (g << 8) | (b << 16) | (a << 24);
             unsafe
             {
                 if (_Buffer != null)
                 {
                     _Buffer->vertex = position;
-                    _Buffer->color = color;
+                    _Buffer->color = (uint)c;
                     _Buffer++;
                     _Buffer->vertex = new Vector3(position.X, position.Y + size.Y, position.Z);
-                    _Buffer->color = color;
+                    _Buffer->color = (uint)c;
                     _Buffer++;
                     _Buffer->vertex = new Vector3(position.X + size.X, position.Y + size.Y, position.Z);
-                    _Buffer->color = color;
+                    _Buffer->color = (uint)c;
                     _Buffer++;
                     _Buffer->vertex = new Vector3(position.X + size.X, position.Y, position.Z);
-                    _Buffer->color = color;
+                    _Buffer->color = (uint)c;
                     _Buffer++;
                 }
               }

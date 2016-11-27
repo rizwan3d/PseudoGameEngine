@@ -48,7 +48,9 @@ namespace PseudoGameEngine.graphics
         public indexbuffer GetIndexBuffer() { return _indexbuffer; }
         public shader GetShader() { return _shader; }
 
+#pragma warning disable CS0108 // 'StaticSprite.delete()' hides inherited member 'Renderable2d.delete()'. Use the new keyword if hiding was intended.
         public void delete()
+#pragma warning restore CS0108 // 'StaticSprite.delete()' hides inherited member 'Renderable2d.delete()'. Use the new keyword if hiding was intended.
         {
             _vertexarray.delete();
             _indexbuffer.delete();

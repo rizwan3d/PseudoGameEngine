@@ -64,6 +64,7 @@ namespace PseudoGameEngine.graphics
             {
                 throw (new initializing_Window("Error occurred initializing Window"));               
             }
+            SDL_GL_SetSwapInterval(0);
             initgl();
             isWindowOpened = true;           
         }
@@ -103,8 +104,6 @@ namespace PseudoGameEngine.graphics
 
             // Set background color as cornflower blue
             gl.ClearColor(0.39f, 0.58f, 0.93f, 1.0f);
-            
-
 
             Clear();
             update();

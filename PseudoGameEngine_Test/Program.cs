@@ -78,6 +78,12 @@ namespace PseudoGameEngine_Test
         {
             window.ClearColor(new Vector4(0, 0, 0, 0));
 
+            Matrix mat = Matrix.CreateTranslation(new Vector3(5,5,5));
+            
+            mat = Matrix.Multiply(mat , Matrix.CreateRotationZ(t.DurationSeconds * 3f));
+            mat = Matrix.Multiply(mat, Matrix.CreateTranslation(new Vector3(-5,-5,-5)));
+            s.SetUniformMatrix("ml_matrix", mat);
+
             render.begin();
             foreach(Renderable2d s in sprites)
             {
@@ -88,7 +94,7 @@ namespace PseudoGameEngine_Test
 
             Random r = new Random();
 
-            Thread.Sleep(r.Next(600,1010));
+            //Thread.Sleep(r.Next(600,1010));
 
             frame++;
             if (t.DurationSeconds - tf > 1.0f)

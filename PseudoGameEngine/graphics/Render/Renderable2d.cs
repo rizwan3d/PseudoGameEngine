@@ -5,7 +5,9 @@ namespace PseudoGameEngine.graphics
 
     public struct VertexData{
         public Vector3 vertex;
-        public Vector4 color;
+        //public Vector4 color;
+        public uint color;
+        
 
     }
 
@@ -15,9 +17,15 @@ namespace PseudoGameEngine.graphics
         public Vector2 _size;
         public Vector4 _color;
 
+#pragma warning disable CS0169 // The field 'Renderable2d._shader' is never used
         shader _shader;
+#pragma warning restore CS0169 // The field 'Renderable2d._shader' is never used
+#pragma warning disable CS0649 // Field 'Renderable2d._vertexarray' is never assigned to, and will always have its default value null
         VertexArray _vertexarray;
+#pragma warning restore CS0649 // Field 'Renderable2d._vertexarray' is never assigned to, and will always have its default value null
+#pragma warning disable CS0649 // Field 'Renderable2d._indexbuffer' is never assigned to, and will always have its default value null
         indexbuffer _indexbuffer;
+#pragma warning restore CS0649 // Field 'Renderable2d._indexbuffer' is never assigned to, and will always have its default value null
 
         public Renderable2d(Vector3 position, Vector2 size, Vector4 color)
         {
