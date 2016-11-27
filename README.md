@@ -7,9 +7,10 @@ Pseudo🎮Engine use following Open Sorce projects:
 
 2. SDL-CS
 
-3. SharpGl
+3. SharpGl			(modifyed)
 
-4. Mono Xna Math
+4. Mono Xna Math	(modifyed)
+
 
 🎲 🕹 🎥 ♠️ 🏉 ⚾ ⚽ 🖥 💻 ⌨ 🚁 🖱
 

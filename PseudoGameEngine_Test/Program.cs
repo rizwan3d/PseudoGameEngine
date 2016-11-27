@@ -4,6 +4,7 @@ using PseudoGameEngine.graphics;
 using PseudoGameEngine.Input;
 using PseudoGameEngine.math;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace PseudoGameEngine_Test
 {
@@ -16,6 +17,10 @@ namespace PseudoGameEngine_Test
         static BatchRenderer2D render;
 
         static List<Renderable2d> sprites = new List<Renderable2d>();
+
+        static PseudoGameEngine.Timer t  = new PseudoGameEngine.Timer();
+        static float tf = 0;
+        static uint frame = 0;
 
         static void Main(string[] args)
         {
@@ -47,8 +52,11 @@ namespace PseudoGameEngine_Test
 
                 s.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
                 s.SetUniform("color", new Vector4(0.2f, 0.3f, 0.8f, 1.0f));
+           
+
 
             window.SetUpdate(EventUpdate, update);
+
 
             window.Quit();   
         }
@@ -68,16 +76,27 @@ namespace PseudoGameEngine_Test
 
         static void update()
         {
-           window.ClearColor(new Vector4(0, 0, 0, 0));
-         
+            window.ClearColor(new Vector4(0, 0, 0, 0));
+
             render.begin();
             foreach(Renderable2d s in sprites)
             {
                 render.submit(s);
-            }                    
-           render.end();
+            }
+            render.end();
             render.flush();
-           
+
+            Random r = new Random();
+
+            Thread.Sleep(r.Next(600,1010));
+
+            frame++;
+            if (t.DurationSeconds - tf > 1.0f)
+            {
+                tf += 1;
+                Console.WriteLine("{0} fps", frame);
+                frame = 0;
+            }
         }
     }
 }

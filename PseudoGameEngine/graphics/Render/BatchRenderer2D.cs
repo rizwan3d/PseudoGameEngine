@@ -1,11 +1,6 @@
 ﻿using SharpGL;
-using SharpGL.VertexBuffers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using PseudoGameEngine.math;
 
 namespace PseudoGameEngine.graphics
@@ -61,7 +56,7 @@ namespace PseudoGameEngine.graphics
               
             gl.VertexAttribPointer(SHADER_VERTEX_INDEX, 3, OpenGL.GL_FLOAT, false,  RENDERER_VERTEX_SIZE, IntPtr.Zero);           
                                                                                                                               // gl.VertexAttribPointer(SHADER_UV_INDEX, 2, OpenGL.GL_FLOAT, false, RENDERER_VERTEX_SIZE,IntPtr.Zero )// new IntPtr(SHADER_VERTEX_SIZE));
-            gl.VertexAttribPointer(SHADER_COLOR_INDEX, 4, OpenGL.GL_FLOAT /*OpenGL.GL_UNSIGNED_BYTE*/, true, RENDERER_VERTEX_SIZE, new IntPtr(3 * Marshal.SizeOf<float>()));//new IntPtr(SHADER_VERTEX_SIZE + SHADER_UV_SIZE));
+            gl.VertexAttribPointer(SHADER_COLOR_INDEX, 4, OpenGL.GL_FLOAT /*OpenGL.GL_UNSIGNED_BYTE*/, true, RENDERER_VERTEX_SIZE, new IntPtr(3 * sizeof(float)));//new IntPtr(SHADER_VERTEX_SIZE + SHADER_UV_SIZE));
            
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
 
