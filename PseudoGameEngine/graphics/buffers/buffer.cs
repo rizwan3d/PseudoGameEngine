@@ -42,10 +42,10 @@ namespace PseudoGameEngine.graphics
            // gl.DeleteBuffers(0,bufferID);
         }
 
-         ~buffer()
-        {
-            delete();
-        }
+        // ~buffer()
+        //{
+        //    delete();
+        //}
 
     }
 }

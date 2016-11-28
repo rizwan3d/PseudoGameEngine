@@ -1,9 +1,4 @@
-﻿using SDL2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using static SDL2.SDL;
 using SharpGL;
 using PseudoGameEngine.Input;
@@ -58,7 +53,7 @@ namespace PseudoGameEngine.graphics
                 throw (new initializing_SDL("Error occurred initializing SDL"));               
             }
             // Create Window with given Information
-            win = SDL.SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Weight, Height, Flags);
+            win = SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Weight, Height, Flags);
             // return error is unable to Create Window
             if (win == null || win == IntPtr.Zero)
             {

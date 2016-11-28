@@ -1,10 +1,4 @@
-﻿using PseudoGameEngine.graphics;
-using PseudoGameEngine.math;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PseudoGameEngine.math;
 
 namespace PseudoGameEngine.graphics { 
     public class Sprite : Renderable2d

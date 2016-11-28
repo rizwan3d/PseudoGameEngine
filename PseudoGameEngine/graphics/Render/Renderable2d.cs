@@ -76,8 +76,11 @@ namespace PseudoGameEngine.graphics
         public void delete()
         {
             _vertexarray.delete();
-            _indexbuffer.delete();
-            
+            _indexbuffer.delete();            
+        }
+        public void submit(Renderer2D renderer)
+        {
+            renderer.submit(this);
         }
     }
 }

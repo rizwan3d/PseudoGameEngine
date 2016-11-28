@@ -152,13 +152,13 @@ namespace PseudoGameEngine.math
         public static float Distance(Vector2 value1, Vector2 value2)
         {
             float v1 = value1.X - value2.X, v2 = value1.Y - value2.Y;
-            return (float)Math.Sqrt((v1 * v1) + (v2 * v2));
+            return (float)System.Math.Sqrt((v1 * v1) + (v2 * v2));
         }
 
         public static void Distance(ref Vector2 value1, ref Vector2 value2, out float result)
         {
             float v1 = value1.X - value2.X, v2 = value1.Y - value2.Y;
-            result = (float)Math.Sqrt((v1 * v1) + (v2 * v2));
+            result = (float)System.Math.Sqrt((v1 * v1) + (v2 * v2));
         }
 
         public static float DistanceSquared(Vector2 value1, Vector2 value2)
@@ -262,7 +262,7 @@ namespace PseudoGameEngine.math
 
         public float Length()
         {
-            return (float)Math.Sqrt((X * X) + (Y * Y));
+            return (float)System.Math.Sqrt((X * X) + (Y * Y));
         }
 
         public float LengthSquared()
@@ -349,14 +349,14 @@ namespace PseudoGameEngine.math
 
         public void Normalize()
         {
-            float val = 1.0f / (float)Math.Sqrt((X * X) + (Y * Y));
+            float val = 1.0f / (float)System.Math.Sqrt((X * X) + (Y * Y));
             X *= val;
             Y *= val;
         }
 
         public static Vector2 Normalize(Vector2 value)
         {
-            float val = 1.0f / (float)Math.Sqrt((value.X * value.X) + (value.Y * value.Y));
+            float val = 1.0f / (float)System.Math.Sqrt((value.X * value.X) + (value.Y * value.Y));
             value.X *= val;
             value.Y *= val;
             return value;
@@ -364,7 +364,7 @@ namespace PseudoGameEngine.math
 
         public static void Normalize(ref Vector2 value, out Vector2 result)
         {
-            float val = 1.0f / (float)Math.Sqrt((value.X * value.X) + (value.Y * value.Y));
+            float val = 1.0f / (float)System.Math.Sqrt((value.X * value.X) + (value.Y * value.Y));
             result.X = value.X * val;
             result.Y = value.Y * val;
         }

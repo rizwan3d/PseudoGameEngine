@@ -30,13 +30,13 @@ namespace PseudoGameEngine.math
 {
     public static class MathHelper
     {
-        public const double E = (double)Math.E;
+        public const double E = (double)System.Math.E;
         public const double Log10E = 0.4342945f;
         public const double Log2E = 1.442695f;
-        public const double Pi = (double)Math.PI;
-        public const double PiOver2 = (double)(Math.PI / 2.0);
-        public const double PiOver4 = (double)(Math.PI / 4.0);
-        public const double TwoPi = (double)(Math.PI * 2.0);
+        public const double Pi = (double)System.Math.PI;
+        public const double PiOver2 = (double)(System.Math.PI / 2.0);
+        public const double PiOver4 = (double)(System.Math.PI / 4.0);
+        public const double TwoPi = (double)(System.Math.PI * 2.0);
 
         public static double Barycentric(double value1, double value2, double value3, double amount1, double amount2)
         {
@@ -69,7 +69,7 @@ namespace PseudoGameEngine.math
 
         public static double Distance(double value1, double value2)
         {
-            return Math.Abs(value1 - value2);
+            return System.Math.Abs(value1 - value2);
         }
 
         public static double Hermite(double value1, double tangent1, double value2, double tangent2, double amount)
@@ -100,12 +100,12 @@ namespace PseudoGameEngine.math
 
         public static double Max(double value1, double value2)
         {
-            return Math.Max(value1, value2);
+            return System.Math.Max(value1, value2);
         }
 
         public static double Min(double value1, double value2)
         {
-            return Math.Min(value1, value2);
+            return System.Math.Min(value1, value2);
         }
 
         public static double SmoothStep(double value1, double value2, double amount)
@@ -114,8 +114,8 @@ namespace PseudoGameEngine.math
             // If amount < 0, return value1
             // If amount > 1, return value2
 #if(USE_FARSEER)
-            double result = SilverSpriteMathHelper.Clamp(amount, 0f, 1f);
-            result = SilverSpriteMathHelper.Hermite(value1, 0f, value2, 0f, result);
+            double result = SilverSpriteSystem.MathHelper.Clamp(amount, 0f, 1f);
+            result = SilverSpriteSystem.MathHelper.Hermite(value1, 0f, value2, 0f, result);
 #else
             double result = MathHelper.Clamp(amount, 0f, 1f);
             result = MathHelper.Hermite(value1, 0f, value2, 0f, result);
@@ -141,7 +141,7 @@ namespace PseudoGameEngine.math
 
         public static double WrapAngle(double angle)
         {
-            angle = (double)Math.IEEERemainder((double)angle, 6.2831854820251465);
+            angle = (double)System.Math.IEEERemainder((double)angle, 6.2831854820251465);
             if (angle <= -3.14159274f)
             {
                 angle += 6.28318548f;

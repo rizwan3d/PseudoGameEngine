@@ -55,10 +55,10 @@ namespace PseudoGameEngine.graphics
             gl.DeleteVertexArrays(1, c);
         }
 
-        ~VertexArray()
-        {
-            delete();
-        }
+        //~VertexArray()
+        //{
+        //    delete();
+        //}
         
 
     }

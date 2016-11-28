@@ -50,9 +50,9 @@ namespace PseudoGameEngine.graphics
             gl.DeleteBuffers(0, a);
         }
 
-        ~indexbuffer()
-        {
-            delete();
-        }
+        //~indexbuffer()
+        //{
+        //    delete();
+        //}
     }
 }

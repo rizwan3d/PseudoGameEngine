@@ -181,8 +181,8 @@ namespace PseudoGameEngine.math
 
             Quaternion quaternion;
             double num2 = angle * 0.5f;
-            double num = (double)Math.Sin((double)num2);
-            double num3 = (double)Math.Cos((double)num2);
+            double num = (double)System.Math.Sin((double)num2);
+            double num3 = (double)System.Math.Cos((double)num2);
             quaternion.X = axis.X * num;
             quaternion.Y = axis.Y * num;
             quaternion.Z = axis.Z * num;
@@ -195,8 +195,8 @@ namespace PseudoGameEngine.math
         public static void CreateFromAxisAngle(ref Vector3 axis, double angle, out Quaternion result)
         {
             double num2 = angle * 0.5f;
-            double num = (double)Math.Sin((double)num2);
-            double num3 = (double)Math.Cos((double)num2);
+            double num = (double)System.Math.Sin((double)num2);
+            double num3 = (double)System.Math.Cos((double)num2);
             result.X = axis.X * num;
             result.Y = axis.Y * num;
             result.Z = axis.Z * num;
@@ -211,7 +211,7 @@ namespace PseudoGameEngine.math
             Quaternion quaternion = new Quaternion();
             if (num8 > 0f)
             {
-                double num = (double)Math.Sqrt((double)(num8 + 1f));
+                double num = (double)System.Math.Sqrt((double)(num8 + 1f));
                 quaternion.W = num * 0.5f;
                 num = 0.5f / num;
                 quaternion.X = (matrix.M23 - matrix.M32) * num;
@@ -221,7 +221,7 @@ namespace PseudoGameEngine.math
             }
             if ((matrix.M11 >= matrix.M22) && (matrix.M11 >= matrix.M33))
             {
-                double num7 = (double)Math.Sqrt((double)(((1f + matrix.M11) - matrix.M22) - matrix.M33));
+                double num7 = (double)System.Math.Sqrt((double)(((1f + matrix.M11) - matrix.M22) - matrix.M33));
                 double num4 = 0.5f / num7;
                 quaternion.X = 0.5f * num7;
                 quaternion.Y = (matrix.M12 + matrix.M21) * num4;
@@ -231,7 +231,7 @@ namespace PseudoGameEngine.math
             }
             if (matrix.M22 > matrix.M33)
             {
-                double num6 = (double)Math.Sqrt((double)(((1f + matrix.M22) - matrix.M11) - matrix.M33));
+                double num6 = (double)System.Math.Sqrt((double)(((1f + matrix.M22) - matrix.M11) - matrix.M33));
                 double num3 = 0.5f / num6;
                 quaternion.X = (matrix.M21 + matrix.M12) * num3;
                 quaternion.Y = 0.5f * num6;
@@ -239,7 +239,7 @@ namespace PseudoGameEngine.math
                 quaternion.W = (matrix.M31 - matrix.M13) * num3;
                 return quaternion;
             }
-            double num5 = (double)Math.Sqrt((double)(((1f + matrix.M33) - matrix.M11) - matrix.M22));
+            double num5 = (double)System.Math.Sqrt((double)(((1f + matrix.M33) - matrix.M11) - matrix.M22));
             double num2 = 0.5f / num5;
             quaternion.X = (matrix.M31 + matrix.M13) * num2;
             quaternion.Y = (matrix.M32 + matrix.M23) * num2;
@@ -256,7 +256,7 @@ namespace PseudoGameEngine.math
             double num8 = (matrix.M11 + matrix.M22) + matrix.M33;
             if (num8 > 0f)
             {
-                double num = (double)Math.Sqrt((double)(num8 + 1f));
+                double num = (double)System.Math.Sqrt((double)(num8 + 1f));
                 result.W = num * 0.5f;
                 num = 0.5f / num;
                 result.X = (matrix.M23 - matrix.M32) * num;
@@ -265,7 +265,7 @@ namespace PseudoGameEngine.math
             }
             else if ((matrix.M11 >= matrix.M22) && (matrix.M11 >= matrix.M33))
             {
-                double num7 = (double)Math.Sqrt((double)(((1f + matrix.M11) - matrix.M22) - matrix.M33));
+                double num7 = (double)System.Math.Sqrt((double)(((1f + matrix.M11) - matrix.M22) - matrix.M33));
                 double num4 = 0.5f / num7;
                 result.X = 0.5f * num7;
                 result.Y = (matrix.M12 + matrix.M21) * num4;
@@ -274,7 +274,7 @@ namespace PseudoGameEngine.math
             }
             else if (matrix.M22 > matrix.M33)
             {
-                double num6 = (double)Math.Sqrt((double)(((1f + matrix.M22) - matrix.M11) - matrix.M33));
+                double num6 = (double)System.Math.Sqrt((double)(((1f + matrix.M22) - matrix.M11) - matrix.M33));
                 double num3 = 0.5f / num6;
                 result.X = (matrix.M21 + matrix.M12) * num3;
                 result.Y = 0.5f * num6;
@@ -283,7 +283,7 @@ namespace PseudoGameEngine.math
             }
             else
             {
-                double num5 = (double)Math.Sqrt((double)(((1f + matrix.M33) - matrix.M11) - matrix.M22));
+                double num5 = (double)System.Math.Sqrt((double)(((1f + matrix.M33) - matrix.M11) - matrix.M22));
                 double num2 = 0.5f / num5;
                 result.X = (matrix.M31 + matrix.M13) * num2;
                 result.Y = (matrix.M32 + matrix.M23) * num2;
@@ -297,14 +297,14 @@ namespace PseudoGameEngine.math
         {
             Quaternion quaternion;
             double num9 = roll * 0.5f;
-            double num6 = (double)Math.Sin((double)num9);
-            double num5 = (double)Math.Cos((double)num9);
+            double num6 = (double)System.Math.Sin((double)num9);
+            double num5 = (double)System.Math.Cos((double)num9);
             double num8 = pitch * 0.5f;
-            double num4 = (double)Math.Sin((double)num8);
-            double num3 = (double)Math.Cos((double)num8);
+            double num4 = (double)System.Math.Sin((double)num8);
+            double num3 = (double)System.Math.Cos((double)num8);
             double num7 = yaw * 0.5f;
-            double num2 = (double)Math.Sin((double)num7);
-            double num = (double)Math.Cos((double)num7);
+            double num2 = (double)System.Math.Sin((double)num7);
+            double num = (double)System.Math.Cos((double)num7);
             quaternion.X = ((num * num4) * num5) + ((num2 * num3) * num6);
             quaternion.Y = ((num2 * num3) * num5) - ((num * num4) * num6);
             quaternion.Z = ((num * num3) * num6) - ((num2 * num4) * num5);
@@ -315,14 +315,14 @@ namespace PseudoGameEngine.math
         public static void CreateFromYawPitchRoll(double yaw, double pitch, double roll, out Quaternion result)
         {
             double num9 = roll * 0.5f;
-            double num6 = (double)Math.Sin((double)num9);
-            double num5 = (double)Math.Cos((double)num9);
+            double num6 = (double)System.Math.Sin((double)num9);
+            double num5 = (double)System.Math.Cos((double)num9);
             double num8 = pitch * 0.5f;
-            double num4 = (double)Math.Sin((double)num8);
-            double num3 = (double)Math.Cos((double)num8);
+            double num4 = (double)System.Math.Sin((double)num8);
+            double num3 = (double)System.Math.Cos((double)num8);
             double num7 = yaw * 0.5f;
-            double num2 = (double)Math.Sin((double)num7);
-            double num = (double)Math.Cos((double)num7);
+            double num2 = (double)System.Math.Sin((double)num7);
+            double num = (double)System.Math.Cos((double)num7);
             result.X = ((num * num4) * num5) + ((num2 * num3) * num6);
             result.Y = ((num2 * num3) * num5) - ((num * num4) * num6);
             result.Z = ((num * num3) * num6) - ((num2 * num4) * num5);
@@ -439,7 +439,7 @@ namespace PseudoGameEngine.math
         public double Length()
         {
             double num = (((this.X * this.X) + (this.Y * this.Y)) + (this.Z * this.Z)) + (this.W * this.W);
-            return (double)Math.Sqrt((double)num);
+            return (double)System.Math.Sqrt((double)num);
         }
 
 
@@ -470,7 +470,7 @@ namespace PseudoGameEngine.math
                 quaternion.W = (num2 * quaternion1.W) - (num * quaternion2.W);
             }
             double num4 = (((quaternion.X * quaternion.X) + (quaternion.Y * quaternion.Y)) + (quaternion.Z * quaternion.Z)) + (quaternion.W * quaternion.W);
-            double num3 = 1f / ((double)Math.Sqrt((double)num4));
+            double num3 = 1f / ((double)System.Math.Sqrt((double)num4));
             quaternion.X *= num3;
             quaternion.Y *= num3;
             quaternion.Z *= num3;
@@ -499,7 +499,7 @@ namespace PseudoGameEngine.math
                 result.W = (num2 * quaternion1.W) - (num * quaternion2.W);
             }
             double num4 = (((result.X * result.X) + (result.Y * result.Y)) + (result.Z * result.Z)) + (result.W * result.W);
-            double num3 = 1f / ((double)Math.Sqrt((double)num4));
+            double num3 = 1f / ((double)System.Math.Sqrt((double)num4));
             result.X *= num3;
             result.Y *= num3;
             result.Z *= num3;
@@ -528,10 +528,10 @@ namespace PseudoGameEngine.math
             }
             else
             {
-                double num5 = (double)Math.Acos((double)num4);
-                double num6 = (double)(1.0 / Math.Sin((double)num5));
-                num3 = ((double)Math.Sin((double)((1f - num) * num5))) * num6;
-                num2 = flag ? (((double)-Math.Sin((double)(num * num5))) * num6) : (((double)Math.Sin((double)(num * num5))) * num6);
+                double num5 = (double)System.Math.Acos((double)num4);
+                double num6 = (double)(1.0 / System.Math.Sin((double)num5));
+                num3 = ((double)System.Math.Sin((double)((1f - num) * num5))) * num6;
+                num2 = flag ? (((double)-System.Math.Sin((double)(num * num5))) * num6) : (((double)System.Math.Sin((double)(num * num5))) * num6);
             }
             quaternion.X = (num3 * quaternion1.X) + (num2 * quaternion2.X);
             quaternion.Y = (num3 * quaternion1.Y) + (num2 * quaternion2.Y);
@@ -560,10 +560,10 @@ namespace PseudoGameEngine.math
             }
             else
             {
-                double num5 = (double)Math.Acos((double)num4);
-                double num6 = (double)(1.0 / Math.Sin((double)num5));
-                num3 = ((double)Math.Sin((double)((1f - num) * num5))) * num6;
-                num2 = flag ? (((double)-Math.Sin((double)(num * num5))) * num6) : (((double)Math.Sin((double)(num * num5))) * num6);
+                double num5 = (double)System.Math.Acos((double)num4);
+                double num6 = (double)(1.0 / System.Math.Sin((double)num5));
+                num3 = ((double)System.Math.Sin((double)((1f - num) * num5))) * num6;
+                num2 = flag ? (((double)-System.Math.Sin((double)(num * num5))) * num6) : (((double)System.Math.Sin((double)(num * num5))) * num6);
             }
             result.X = (num3 * quaternion1.X) + (num2 * quaternion2.X);
             result.Y = (num3 * quaternion1.Y) + (num2 * quaternion2.Y);
@@ -679,7 +679,7 @@ namespace PseudoGameEngine.math
         public void Normalize()
         {
             double num2 = (((this.X * this.X) + (this.Y * this.Y)) + (this.Z * this.Z)) + (this.W * this.W);
-            double num = 1f / ((double)Math.Sqrt((double)num2));
+            double num = 1f / ((double)System.Math.Sqrt((double)num2));
             this.X *= num;
             this.Y *= num;
             this.Z *= num;
@@ -691,7 +691,7 @@ namespace PseudoGameEngine.math
         {
             Quaternion quaternion2;
             double num2 = (((quaternion.X * quaternion.X) + (quaternion.Y * quaternion.Y)) + (quaternion.Z * quaternion.Z)) + (quaternion.W * quaternion.W);
-            double num = 1f / ((double)Math.Sqrt((double)num2));
+            double num = 1f / ((double)System.Math.Sqrt((double)num2));
             quaternion2.X = quaternion.X * num;
             quaternion2.Y = quaternion.Y * num;
             quaternion2.Z = quaternion.Z * num;
@@ -703,7 +703,7 @@ namespace PseudoGameEngine.math
         public static void Normalize(ref Quaternion quaternion, out Quaternion result)
         {
             double num2 = (((quaternion.X * quaternion.X) + (quaternion.Y * quaternion.Y)) + (quaternion.Z * quaternion.Z)) + (quaternion.W * quaternion.W);
-            double num = 1f / ((double)Math.Sqrt((double)num2));
+            double num = 1f / ((double)System.Math.Sqrt((double)num2));
             result.X = quaternion.X * num;
             result.Y = quaternion.Y * num;
             result.Z = quaternion.Z * num;

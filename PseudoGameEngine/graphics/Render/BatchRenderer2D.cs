@@ -83,7 +83,7 @@ namespace PseudoGameEngine.graphics
             gl.BindVertexArray(0);
         }
 
-        public void begin()
+        public override void begin()
         {
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, _VBO);
            
@@ -157,7 +157,7 @@ namespace PseudoGameEngine.graphics
         }
 
 
-        public void end()
+        public override void end()
         {
             gl.UnmapBuffer(OpenGL.GL_ARRAY_BUFFER);
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
@@ -177,16 +177,16 @@ namespace PseudoGameEngine.graphics
             _IndexCount = 0;
         }
 
-        public void delete()
+        public override void delete()
         {
             _indexbuffer.delete();
             uint[] vbo = { _VBO, 0 };
             gl.DeleteBuffers(0, vbo);
         }
 
-        ~BatchRenderer2D()
-        {
-            delete();
-        }
+        //~BatchRenderer2D()
+        //{
+        //    delete();
+        //}
 }
 }

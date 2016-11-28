@@ -65,6 +65,8 @@
     <Compile Include="graphics\buffers\buffer.cs" />
     <Compile Include="graphics\buffers\indexbuffer.cs" />
     <Compile Include="graphics\buffers\vertexarray.cs" />
+    <Compile Include="graphics\layers\Layer.cs" />
+    <Compile Include="graphics\layers\TileLayer.cs" />
     <Compile Include="graphics\Render\BatchRenderer2D.cs" />
     <Compile Include="graphics\Render\Renderer.cs" />
     <Compile Include="graphics\Render\Renderable2d.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="graphics\sprites\StaticSprite.cs" />
     <Compile Include="graphics\Window.cs" />
     <Compile Include="input\InputEnums.cs" />
+    <Compile Include="math\extrafunctions.cs" />
     <Compile Include="math\MathHelper.cs" />
     <Compile Include="math\Matrix.cs" />
     <Compile Include="math\Quaternion.cs" />
@@ -89,6 +92,10 @@
     <ProjectReference Include="..\SDL2-CS\SDL2.csproj">
       <Project>{85480198-8711-4355-830e-72fd794ad3f6}</Project>
       <Name>SDL2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\sharpgl\source\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
+      <Project>{47BCAA39-EDAD-4404-B6BD-4742B0ABB523}</Project>
+      <Name>SharpGL.SceneGraph</Name>
     </ProjectReference>
     <ProjectReference Include="..\sharpgl\source\SharpGL\Core\SharpGL\SharpGL.csproj">
       <Project>{5ef45533-e2c7-46f2-b4a3-b8f36cd406e0}</Project>

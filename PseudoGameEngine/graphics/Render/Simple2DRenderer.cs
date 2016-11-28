@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PseudoGameEngine.math;
 
 namespace PseudoGameEngine.graphics
@@ -19,7 +17,7 @@ namespace PseudoGameEngine.graphics
 
         }
 
-        public void delete()
+        public override void delete()
         {
             while (_RedererQueue.Count != 0)
             {

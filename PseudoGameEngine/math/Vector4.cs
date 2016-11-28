@@ -235,12 +235,12 @@ namespace PseudoGameEngine.math
 
         public static float Distance(Vector4 value1, Vector4 value2)
         {
-            return (float)Math.Sqrt(DistanceSquared(value1, value2));
+            return (float)System.Math.Sqrt(DistanceSquared(value1, value2));
         }
 
         public static void Distance(ref Vector4 value1, ref Vector4 value2, out float result)
         {
-            result = (float)Math.Sqrt(DistanceSquared(value1, value2));
+            result = (float)System.Math.Sqrt(DistanceSquared(value1, value2));
         }
 
         public static float DistanceSquared(Vector4 value1, Vector4 value2)
@@ -348,7 +348,7 @@ namespace PseudoGameEngine.math
         {
             float result;
             DistanceSquared(ref this, ref zeroVector, out result);
-            return (float)Math.Sqrt(result);
+            return (float)System.Math.Sqrt(result);
         }
 
         public float LengthSquared()
@@ -472,7 +472,7 @@ namespace PseudoGameEngine.math
         {
             float factor;
             DistanceSquared(ref vector, ref zeroVector, out factor);
-            factor = 1f / (float)Math.Sqrt(factor);
+            factor = 1f / (float)System.Math.Sqrt(factor);
 
             result.W = vector.W * factor;
             result.X = vector.X * factor;
