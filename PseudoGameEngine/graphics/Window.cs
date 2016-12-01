@@ -29,6 +29,10 @@ namespace PseudoGameEngine.graphics
         // store information of window
         bool isWindowOpened;
 
+
+        public EventUpdatedelegate onEvent;
+        public Updatedelegate Update;
+
         public Window(string title, int weight, int height, bool fullscreen = true)
         {
             //Set windows information to private var
@@ -183,7 +187,7 @@ namespace PseudoGameEngine.graphics
         eventInit ei = new eventInit();
 
         // call Funtion on event and without event update
-        public void SetUpdate(Func<Event, int> EventUpdateFunction,Action Update)
+        public void Start(/*Func<Event, int> EventUpdateFunction,Action Update*/)
         {
             // if window is open
             while (isWindowOpened)
@@ -197,42 +201,17 @@ namespace PseudoGameEngine.graphics
                         if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
                             resetSize();
                     // call give function on new event
-                    Event e = ei.eventfinder[_event.type];                    
-                    EventUpdateFunction(e);                             
+                    Event e = ei.eventfinder[_event.type];
+                    //ventUpdateFunction(e);                             
+                    onEvent(e);
                 }
                 //call other update function
                 Clear();
-                Update();//input function
+                Update();
+                //Update();//input function
                 update();//update gl port
             }
-        }
-        public void SetUpdate(Func<SDL_EventType, int> EventUpdateFunction)
-        {
-            // if window is open
-            while (isWindowOpened)
-                /* Check for new events */
-                while (SDL_PollEvent(out _event) == 1)
-                {
-                    //if event is related to Window
-                    if (_event.type == SDL_EventType.SDL_WINDOWEVENT)
-                        //if Window resized call  resetSize()
-                        if (_event.window.windowEvent == SDL_WindowEventID.SDL_WINDOWEVENT_RESIZED)
-                            resetSize();
-                    // call give function on new event
-                    EventUpdateFunction(_event.type);
-                }
-        }
-        public void SetUpdate(Action Update)
-        {
-            // if window is open
-            while (isWindowOpened)
-            {
-                // call give function on new event        
-                Clear();
-                Update();//input function
-                update();//update gl port
-            }
-        }
+        }       
 
         void resetSize()
         {

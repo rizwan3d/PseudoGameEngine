@@ -60,6 +60,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="utils\Debug.cs" />
+    <Compile Include="delegate.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="exception.cs" />
     <Compile Include="graphics\buffers\buffer.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="math\Vector4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysinfo\sysinfo.cs" />
+    <Compile Include="utils\Random.cs" />
     <Compile Include="utils\Timer.cs" />
   </ItemGroup>
   <ItemGroup>

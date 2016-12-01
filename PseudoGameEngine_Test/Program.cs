@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using PseudoGameEngine;
+﻿using PseudoGameEngine;
 using PseudoGameEngine.graphics;
 using PseudoGameEngine.Input;
 using PseudoGameEngine.math;
@@ -13,8 +11,8 @@ namespace PseudoGameEngine_Test
         static Window window;
 
         static shader s;
-        static shader s2;
-        static shader s3;
+        //static shader s2;
+        //static shader s3;
 
 
 
@@ -25,8 +23,8 @@ namespace PseudoGameEngine_Test
         static uint frame = 0;
 
         static TileLayer layer;
-        static TileLayer layer2;
-        static TileLayer layer3;
+        //static TileLayer layer2;
+        //static TileLayer layer3;
 
 
         static int x = 0, y = 0;
@@ -35,56 +33,60 @@ namespace PseudoGameEngine_Test
         {
                 window = new Window("Text", 960, 540, false);
 
-                Console.WriteLine("Vendor {0}", sysinfo.Vendor());
-                Console.WriteLine("Render {0}", sysinfo.Render());
-                Console.WriteLine("OpenGLVersion {0}", sysinfo.OpenGLVersion());
-                Console.WriteLine("ShadingLanguageVersion {0}", sysinfo.ShadingLanguageVersion());
+                Debue.Log("Vendor " + sysinfo.Vendor());
+                Debue.Error("Render " + sysinfo.Render());
+                Debue.Warning("OpenGLVersion "+ sysinfo.OpenGLVersion());
+                Debue.Log("ShadingLanguageVersion " + sysinfo.ShadingLanguageVersion());
 
                 s = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
-            s2 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
-            s3 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
+            //s2 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
+            //s3 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
 
             s.enable();
-            s2.enable();
-            s3.enable();
+            //s2.enable();
+            //s3.enable();
             s.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
-            s2.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
-            s3.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
+            //s2.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
+            //s3.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
             
 
             layer = new TileLayer(s);
 
-            Random r = new Random();
-            int range = 1;
+            ///Random r = new Random();
+            // int range = 1;
 
             //for (float y = -9; y < 9.0f; y += 0.1f)
             //{
             //    for (float x = -16.0f; x < 16.0; x += 0.1f)
             //    {
-                    layer.add(new Sprite(-8, -8, 2,2 /*0.09f, 0.09f*/, new Vector4((float)(r.NextDouble() * range), 0, 1, 1)));
-                    layer.add(new Sprite(-6, -6, 2, 2 /*0.09f, 0.09f*/, new Vector4(1, 0, (float)(r.NextDouble() * range), 1)));
+                    layer.add(new Sprite(-8, -8, 2,2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, 1, 1)));
+                    layer.add(new Sprite(-6, -6, 2, 2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, (float)(.5), 1)));
             //    }
             // }
 
 
 
-            layer2 = new TileLayer(s2);
-            layer2.add(new Sprite(-2, -2, 4, 4, new Vector4(1, 0, 1, 1)));
+            //layer2 = new TileLayer(s2);
+            //layer2.add(new Sprite(-2, -2, 4, 4, new Vector4(1, 0, 1, 1)));
 
-            layer3 = new TileLayer(s2);
-            layer3.add(new Sprite(2, 2, 4, 4, new Vector4(1, 0, 1, 1)));
+            //layer3 = new TileLayer(s2);
+            //layer3.add(new Sprite(2, 2, 4, 4, new Vector4(1, 0, 1, 1)));
 
 
 
             // layer.add(new Sprite(0, 0, 2, 2, new Vector4(0.8f, 0.2f, 0.8f, 1)));
 
-            window.SetUpdate(EventUpdate, update);
+            //window.SetUpdate(EventUpdate, update);
 
+            window.Update += new Updatedelegate(update);
+            window.onEvent += new EventUpdatedelegate(EventUpdate);
+
+            window.Start();
 
             window.Quit();   
         }
-
-        static int EventUpdate(Event _event)
+        
+        static void EventUpdate(Event _event)
         {
             if (_event == Event.QUIT || window.isKeyPresed(KeyCode.ESCAPE)) { window.Quit(); }
             if(_event == Event.MOUSEBUTTONDOWN)
@@ -94,7 +96,7 @@ namespace PseudoGameEngine_Test
              x = window.MousePositionX();
              y = window.MousePositionY();
           
-            return 0;
+          //  return 0;
         }
 
         static void update()
@@ -104,23 +106,23 @@ namespace PseudoGameEngine_Test
 
             s.enable();
             s.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));            
-            s2.enable();
-            s2.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
+            //s2.enable();
+            //s2.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
 
 
             layer.render();
-           layer2.render();
-            layer3.render();
+           //layer2.render();
+           // layer3.render();
 
-            // Random r = new Random();
+            
 
-            //Thread.Sleep(r.Next(600,1010));
+            //Thread.Sleep(Randome.Get(600,1010));
 
             frame++;
             if (t.DurationSeconds - tf > 1.0f)
             {
                 tf += 1;
-                Console.WriteLine("{0} fps", frame);
+                Debue.Log(frame + " fps");
                 frame = 0;
             }
 
