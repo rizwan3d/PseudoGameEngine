@@ -8,7 +8,7 @@ namespace PseudoGameEngine_Test
     class Program
     {
         static Shader s;
-        //static shader s2;
+        static Shader s2;
         //static shader s3;
         
         //static List<Renderable2d> sprites = new List<Renderable2d>();
@@ -18,7 +18,7 @@ namespace PseudoGameEngine_Test
         static uint frame = 0;
 
         static TileLayer layer;
-        //static TileLayer layer2;
+        static TileLayer layer2;
         //static TileLayer layer3;
 
 
@@ -34,14 +34,14 @@ namespace PseudoGameEngine_Test
                 Debue.Log("ShadingLanguageVersion " + Sysinfo.ShadingLanguageVersion());
 
                 s = new Shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
-            //s2 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
+            s2 = new Shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
             //s3 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
 
             s.Enable();
-            //s2.enable();
+            s2.Enable();
             //s3.enable();            
             s.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
-            //s2.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
+            s2.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
             //s3.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
             
 
@@ -50,19 +50,19 @@ namespace PseudoGameEngine_Test
             ///Random r = new Random();
             // int range = 1;
 
-            //for (float y = -9; y < 9.0f; y += 0.1f)
-            //{
-            //    for (float x = -16.0f; x < 16.0; x += 0.1f)
-            //    {
-                    layer.Add(new Sprite(-8, -8, 2,2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, 1, 1)));
-                    layer.Add(new Sprite(-6, -6, 2, 2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, (float)(.5), 1)));
-            //    }
-            // }
+            for (float y = 0; y < 9.0f; y += 0.1f)
+            {
+                for (float x = 0; x < 16.0; x += 0.1f)
+                {
+                    layer.Add(new Sprite(x,y, 0.9f, 0.9f, new Vector4(Random.Get(0f, 1f), 0, 1, 1)));
+                    //layer.Add(new Sprite(x, y, 0.09f, 0.09f, new Vector4(Random.Get(0f,1f), 0, (float)(.5), 1)));
+                }
+            }
 
 
 
-            //layer2 = new TileLayer(s2);
-            //layer2.add(new Sprite(-2, -2, 4, 4, new Vector4(1, 0, 1, 1)));
+            layer2 = new TileLayer(s2);
+            layer2.Add(new Sprite(2, 2, 2, 2, new Vector4(1, 0, 1, 1)));
 
             //layer3 = new TileLayer(s2);
             //layer3.add(new Sprite(2, 2, 4, 4, new Vector4(1, 0, 1, 1)));
@@ -88,11 +88,11 @@ namespace PseudoGameEngine_Test
 
             s.Enable();
             s.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
-            //s2.enable();
-            //s2.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
+            s2.Enable();
+            s2.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
             
             layer.Render();
-            //layer2.render();
+            layer2.Render();
             // layer3.render();
             
             //Thread.Sleep(Randome.Get(600,1010));
@@ -105,7 +105,7 @@ namespace PseudoGameEngine_Test
                 frame = 0;
             }
 
-            s.Delete();
+            //s.Delete();
         }
 
         private static void Window_onEvent(Window sender,Event e)

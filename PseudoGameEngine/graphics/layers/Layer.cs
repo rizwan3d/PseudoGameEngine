@@ -46,7 +46,8 @@ namespace PseudoGameEngine.Graphics
                 renderable.submit(_Renderer);
             }
             _Renderer.End();
-            _Renderer.Flush();
+            _Renderer.Flush();           
+            //_Shader.Disable();
         }
 
         ~Layer(){

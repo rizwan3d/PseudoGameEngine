@@ -8,14 +8,13 @@ namespace PseudoGameEngine
 {
     public static class Random
     {
+        static System.Random r = new System.Random();
         public static int Get(int min, int max)
-        {
-            System.Random r = new System.Random();
+        {           
             return r.Next(min, max);
         }
         public static double Get(double min, double max)
         {
-            System.Random r = new System.Random();
             double rDouble = r.NextDouble() * (max - min) + min;
             return rDouble;
         }
