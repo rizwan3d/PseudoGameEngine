@@ -1,5 +1,5 @@
 ﻿
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
     class Renderer
     {

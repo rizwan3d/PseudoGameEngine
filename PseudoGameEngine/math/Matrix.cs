@@ -26,7 +26,7 @@ SOFTWARE.
 #endregion License
 using System;
 
-namespace PseudoGameEngine.math
+namespace PseudoGameEngine.Math
 {
     public struct Matrix : IEquatable<Matrix>
     {

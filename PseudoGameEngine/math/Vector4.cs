@@ -29,7 +29,7 @@ using System;
 using System.Text;
 
 
-namespace PseudoGameEngine.math
+namespace PseudoGameEngine.Math
 {
     [Serializable]
     public struct Vector4 : IEquatable<Vector4>

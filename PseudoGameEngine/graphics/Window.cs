@@ -2,9 +2,9 @@
 using static SDL2.SDL;
 using SharpGL;
 using PseudoGameEngine.Input;
-using PseudoGameEngine.math;
+using PseudoGameEngine.Math;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
     public class Window
     {
@@ -30,8 +30,8 @@ namespace PseudoGameEngine.graphics
         bool isWindowOpened;
 
 
-        public EventUpdatedelegate onEvent;
-        public Updatedelegate Update;
+        public event EventUpdatedelegate onEvent;
+        public event Updatedelegate Update;
 
         public Window(string title, int weight, int height, bool fullscreen = true)
         {
@@ -54,14 +54,14 @@ namespace PseudoGameEngine.graphics
             if (SDL_Init(SDL_INIT_VIDEO) < 0)
             // return error is unable to initializing SDL
             {
-                throw (new initializing_SDL("Error occurred initializing SDL"));               
+                throw (new Initializing_SDL("Error occurred initializing SDL"));               
             }
             // Create Window with given Information
             win = SDL_CreateWindow(Title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Weight, Height, Flags);
             // return error is unable to Create Window
             if (win == null || win == IntPtr.Zero)
             {
-                throw (new initializing_Window("Error occurred initializing Window"));               
+                throw (new Initializing_Window("Error occurred initializing Window"));               
             }
             SDL_GL_SetSwapInterval(0);
             initgl();
@@ -97,7 +97,7 @@ namespace PseudoGameEngine.graphics
             // return error is unable to Create Window
             if (glContext == null || glContext == IntPtr.Zero)  
             {
-                throw (new initializing_OpenGL_context("Error occurred creating OpenGL context"));               
+                throw (new Initializing_OpenGL_Context("Error occurred creating OpenGL context"));               
             }
 
 
@@ -113,7 +113,7 @@ namespace PseudoGameEngine.graphics
         //create a instance of InputInit 
         InputInit II = new InputInit();
 
-        public bool isKeyPresed(KeyCode keycode)
+        public bool IsKeyPresed(KeyCode keycode)
         {
             // if event is related to key down
             if (_event.type == SDL_EventType.SDL_KEYDOWN)
@@ -127,7 +127,7 @@ namespace PseudoGameEngine.graphics
             return false;
         }
 
-        public bool isMouseButtonPressed(MouseButton code)
+        public bool IsMouseButtonPressed(MouseButton code)
         {
             // if event related to mouse button doen
             if (_event.type == SDL_EventType.SDL_MOUSEBUTTONDOWN)
@@ -203,11 +203,11 @@ namespace PseudoGameEngine.graphics
                     // call give function on new event
                     Event e = ei.eventfinder[_event.type];
                     //ventUpdateFunction(e);                             
-                    onEvent(e);
+                    onEvent(this,e);
                 }
                 //call other update function
                 Clear();
-                Update();
+                Update(this);
                 //Update();//input function
                 update();//update gl port
             }

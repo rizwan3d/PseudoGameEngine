@@ -1,21 +1,16 @@
 ﻿using PseudoGameEngine;
-using PseudoGameEngine.graphics;
+using PseudoGameEngine.Graphics;
 using PseudoGameEngine.Input;
-using PseudoGameEngine.math;
-
+using PseudoGameEngine.Math;
 
 namespace PseudoGameEngine_Test
 {
     class Program
     {
-        static Window window;
-
-        static shader s;
+        static Shader s;
         //static shader s2;
         //static shader s3;
-
-
-
+        
         //static List<Renderable2d> sprites = new List<Renderable2d>();
 
         static Timer t  = new Timer();
@@ -31,20 +26,20 @@ namespace PseudoGameEngine_Test
 
         static void Main(string[] args)
         {
-                window = new Window("Text", 960, 540, false);
+             Window window = new Window("Text", 960, 540, false);
 
-                Debue.Log("Vendor " + sysinfo.Vendor());
-                Debue.Error("Render " + sysinfo.Render());
-                Debue.Warning("OpenGLVersion "+ sysinfo.OpenGLVersion());
-                Debue.Log("ShadingLanguageVersion " + sysinfo.ShadingLanguageVersion());
+                Debue.Log("Vendor " + Sysinfo.Vendor());
+                Debue.Error("Render " + Sysinfo.Render());
+                Debue.Warning("OpenGLVersion "+ Sysinfo.OpenGLVersion());
+                Debue.Log("ShadingLanguageVersion " + Sysinfo.ShadingLanguageVersion());
 
-                s = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
+                s = new Shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
             //s2 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
             //s3 = new shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
 
-            s.enable();
+            s.Enable();
             //s2.enable();
-            //s3.enable();
+            //s3.enable();            
             s.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
             //s2.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
             //s3.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
@@ -59,8 +54,8 @@ namespace PseudoGameEngine_Test
             //{
             //    for (float x = -16.0f; x < 16.0; x += 0.1f)
             //    {
-                    layer.add(new Sprite(-8, -8, 2,2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, 1, 1)));
-                    layer.add(new Sprite(-6, -6, 2, 2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, (float)(.5), 1)));
+                    layer.Add(new Sprite(-8, -8, 2,2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, 1, 1)));
+                    layer.Add(new Sprite(-6, -6, 2, 2 /*0.09f, 0.09f*/, new Vector4(Random.Get(0f,1f), 0, (float)(.5), 1)));
             //    }
             // }
 
@@ -78,44 +73,28 @@ namespace PseudoGameEngine_Test
 
             //window.SetUpdate(EventUpdate, update);
 
-            window.Update += new Updatedelegate(update);
-            window.onEvent += new EventUpdatedelegate(EventUpdate);
+            window.Update += Window_Update;
+            window.onEvent += Window_onEvent;
 
             window.Start();
 
             window.Quit();   
         }
-        
-        static void EventUpdate(Event _event)
+
+        private static void Window_Update(Window sender)
         {
-            if (_event == Event.QUIT || window.isKeyPresed(KeyCode.ESCAPE)) { window.Quit(); }
-            if(_event == Event.MOUSEBUTTONDOWN)
-            {
-                window.Quit();
-            }
-             x = window.MousePositionX();
-             y = window.MousePositionY();
-          
-          //  return 0;
-        }
 
-        static void update()
-        {
-            window.ClearColor(new Vector4(0, 0, 0, 0));
+            sender.ClearColor(new Vector4(0, 0, 0, 0));
 
-
-            s.enable();
-            s.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));            
+            s.Enable();
+            s.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
             //s2.enable();
             //s2.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
-
-
-            layer.render();
-           //layer2.render();
-           // layer3.render();
-
             
-
+            layer.Render();
+            //layer2.render();
+            // layer3.render();
+            
             //Thread.Sleep(Randome.Get(600,1010));
 
             frame++;
@@ -126,7 +105,15 @@ namespace PseudoGameEngine_Test
                 frame = 0;
             }
 
-            s.delete();
+            s.Delete();
+        }
+
+        private static void Window_onEvent(Window sender,Event e)
+        {
+            if (e == Event.QUIT || sender.IsKeyPresed(KeyCode.ESCAPE)) { sender.Quit(); }
+            if (e == Event.MOUSEBUTTONDOWN){ sender.Quit(); }
+            x = sender.MousePositionX();
+            y = sender.MousePositionY();
         }
     }
 }

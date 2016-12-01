@@ -61,7 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="utils\Debug.cs" />
-    <Compile Include="delegate.cs" />
+    <Compile Include="Events\delegate.cs" />
     <Compile Include="Events\Events.cs" />
     <Compile Include="exception.cs" />
     <Compile Include="graphics\buffers\buffer.cs" />

@@ -1,15 +1,15 @@
-﻿using PseudoGameEngine.math;
+﻿using PseudoGameEngine.Math;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
-    public class StaticSprite : Renderable2d
+    public class StaticSprite : Renderable2D
     {
         public VertexArray _vertexarray;
-        public indexbuffer _indexbuffer;
+        public IndexBuffer _indexbuffer;
 
-        public shader _shader;
+        public Shader _shader;
 
-        public StaticSprite(float x ,float y , float width, float height , Vector4 color, shader shader) 
+        public StaticSprite(float x ,float y , float width, float height , Vector4 color, Shader shader) 
             : base(new Vector3(x, y, 0), new Vector2(width, height), color)
         {
             _shader = shader;
@@ -31,23 +31,23 @@ namespace PseudoGameEngine.graphics
 
             _vertexarray = new VertexArray();
 
-            _vertexarray.AddBuffer(new buffer(vertices, 4 * 3, 3), 0);
-            _vertexarray.AddBuffer(new buffer(colour, 4 * 4, 4), 1);
+            _vertexarray.AddBuffer(new Buffer(vertices, 4 * 3, 3), 0);
+            _vertexarray.AddBuffer(new Buffer(colour, 4 * 4, 4), 1);
 
 
             ushort[] indices = { 0, 1, 2, 2, 3, 0 };
-            _indexbuffer = new indexbuffer(indices, 6);
+            _indexbuffer = new IndexBuffer(indices, 6);
         }
         public VertexArray GetVertexArray() { return _vertexarray; }
-        public indexbuffer GetIndexBuffer() { return _indexbuffer; }
-        public shader GetShader() { return _shader; }
+        public IndexBuffer GetIndexBuffer() { return _indexbuffer; }
+        public Shader GetShader() { return _shader; }
 
-#pragma warning disable CS0108 // 'StaticSprite.delete()' hides inherited member 'Renderable2d.delete()'. Use the new keyword if hiding was intended.
+#pragma warning disable CS0108 // 'StaticSprite.delete()' hides inherited member 'Renderable2D.delete()'. Use the new keyword if hiding was intended.
         public void delete()
-#pragma warning restore CS0108 // 'StaticSprite.delete()' hides inherited member 'Renderable2d.delete()'. Use the new keyword if hiding was intended.
+#pragma warning restore CS0108 // 'StaticSprite.delete()' hides inherited member 'Renderable2D.delete()'. Use the new keyword if hiding was intended.
         {
-            _vertexarray.delete();
-            _indexbuffer.delete();
+            _vertexarray.Delete();
+            _indexbuffer.Delete();
         }
         //~StaticSprite()
         //{

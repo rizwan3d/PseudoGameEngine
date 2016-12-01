@@ -27,7 +27,7 @@ SOFTWARE.
 using System;
 using System.Globalization;
 
-namespace PseudoGameEngine.math
+namespace PseudoGameEngine.Math
 {
     [Serializable]
     public struct Vector2 : IEquatable<Vector2>

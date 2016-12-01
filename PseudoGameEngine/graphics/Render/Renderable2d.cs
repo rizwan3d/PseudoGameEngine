@@ -1,6 +1,6 @@
-﻿using PseudoGameEngine.math;
+﻿using PseudoGameEngine.Math;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
 
     public struct VertexData{
@@ -11,23 +11,23 @@ namespace PseudoGameEngine.graphics
 
     }
 
-    public class Renderable2d
+    public class Renderable2D
     {
         public Vector3 _position;
         public Vector2 _size;
         public Vector4 _color;
 
-#pragma warning disable CS0169 // The field 'Renderable2d._shader' is never used
-        shader _shader;
-#pragma warning restore CS0169 // The field 'Renderable2d._shader' is never used
-#pragma warning disable CS0649 // Field 'Renderable2d._vertexarray' is never assigned to, and will always have its default value null
+#pragma warning disable CS0169 // The field 'Renderable2D._shader' is never used
+        Shader _shader;
+#pragma warning restore CS0169 // The field 'Renderable2D._shader' is never used
+#pragma warning disable CS0649 // Field 'Renderable2D._vertexarray' is never assigned to, and will always have its default value null
         VertexArray _vertexarray;
-#pragma warning restore CS0649 // Field 'Renderable2d._vertexarray' is never assigned to, and will always have its default value null
-#pragma warning disable CS0649 // Field 'Renderable2d._indexbuffer' is never assigned to, and will always have its default value null
-        indexbuffer _indexbuffer;
-#pragma warning restore CS0649 // Field 'Renderable2d._indexbuffer' is never assigned to, and will always have its default value null
+#pragma warning restore CS0649 // Field 'Renderable2D._vertexarray' is never assigned to, and will always have its default value null
+#pragma warning disable CS0649 // Field 'Renderable2D._indexbuffer' is never assigned to, and will always have its default value null
+        IndexBuffer _indexbuffer;
+#pragma warning restore CS0649 // Field 'Renderable2D._indexbuffer' is never assigned to, and will always have its default value null
 
-        public Renderable2d(Vector3 position, Vector2 size, Vector4 color)
+        public Renderable2D(Vector3 position, Vector2 size, Vector4 color)
         {
             _position = position;
             _size = size;
@@ -68,19 +68,19 @@ namespace PseudoGameEngine.graphics
         public Vector2 GetSize() { return _size; }
         public Vector4 GetColor() { return _color; }
 
-        ~Renderable2d()
+        ~Renderable2D()
         {
             delete();
         }
 
         public void delete()
         {
-            _vertexarray.delete();
-            _indexbuffer.delete();            
+            _vertexarray.Delete();
+            _indexbuffer.Delete();            
         }
         public void submit(Renderer2D renderer)
         {
-            renderer.submit(this);
+            renderer.Submit(this);
         }
     }
 }

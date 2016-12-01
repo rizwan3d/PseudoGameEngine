@@ -1,8 +1,8 @@
 ﻿using SharpGL;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
-    public class buffer
+    public class Buffer
     {
         uint[] bufferID;
         uint ComponentCount;
@@ -10,7 +10,7 @@ namespace PseudoGameEngine.graphics
         OpenGL gl = new OpenGL();
         
 
-        public buffer(float[] data,int count,uint componentCount)
+        public Buffer(float[] data,int count,uint componentCount)
         {
             bufferID = new uint[2];
             this.ComponentCount = componentCount;
@@ -24,12 +24,12 @@ namespace PseudoGameEngine.graphics
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
         }
         
-        public void bind()
+        public void Bind()
         {
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, bufferID[0]);
         }
 
-        public void unbind()
+        public void Unbind()
         {
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
         }
@@ -38,14 +38,14 @@ namespace PseudoGameEngine.graphics
             return this.ComponentCount;
         }
 
-        public void delete() {
-           // gl.DeleteBuffers(0,bufferID);
+        public void Delete() {
+            gl.DeleteBuffers(0,bufferID);
         }
 
-        // ~buffer()
-        //{
-        //    delete();
-        //}
+        ~Buffer()
+        {
+            Delete();
+        }
 
     }
 }

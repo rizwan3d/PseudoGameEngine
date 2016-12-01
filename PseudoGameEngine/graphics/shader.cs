@@ -1,30 +1,30 @@
 ﻿using System;
 using SharpGL;
 using SharpGL.Shaders;
-using PseudoGameEngine.math;
+using PseudoGameEngine.Math;
 using System.IO;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
-    public class shader
+    public class Shader
     {
         OpenGL gl = new OpenGL();
 
         //store int id of shader
-        UInt32 m_shaderID;
+        UInt32 _shaderID;
         //input path of shaders
-        string m_vertPath, m_fragPath;
-        public shader(string vertPath, string fragPath)
+        string _vertPath, _fragPath;
+        public Shader(string vertPath, string fragPath)
         {
             //assign input paths to global var
-            m_vertPath = vertPath;
-            m_fragPath = fragPath;
+            _vertPath = vertPath;
+            _fragPath = fragPath;
 
             //get shader id form load func
-            m_shaderID = load();
+            _shaderID = Load();
         }
 
-        public UInt32 load()
+        public UInt32 Load()
         {
             #region old code
             ////opengl program for shaders
@@ -35,23 +35,23 @@ namespace PseudoGameEngine.graphics
             //UInt32 fragment = gl.CreateShader(OpenGL.GL_FRAGMENT_SHADER);
 
             ////read shaders sorce
-            //string vertsorce = System.IO.File.ReadAllText(m_vertPath);
-            //string fragsorce = System.IO.File.ReadAllText(m_fragPath);
+            //string vertsorce = System.IO.File.ReadAllText(_vertPath);
+            //string fragsorce = System.IO.File.ReadAllText(_fragPath);
             #endregion
 
 
-            if (!File.Exists(m_vertPath))
-                throw (new vertex_Shader_file_not_found("vertex Shader file not found."));
-            if (!File.Exists(m_fragPath))
-                throw (new fragment_Shader_file_not_found("fragment Shader file not found."));
+            if (!File.Exists(_vertPath))
+                throw (new Vertex_Shader_File_Not_Found("vertex Shader file not found."));
+            if (!File.Exists(_fragPath))
+                throw (new Fragment_Shader_File_Not_Found("fragment Shader file not found."));
 
             //read shaders sorce
-            string vertsorce = System.IO.File.ReadAllText(m_vertPath);
-            string fragsorce = System.IO.File.ReadAllText(m_fragPath);
+            string vertsorce = System.IO.File.ReadAllText(_vertPath);
+            string fragsorce = System.IO.File.ReadAllText(_fragPath);
 
-            
-            Shader vs = new Shader();
-            Shader fs = new Shader();
+
+            SharpGL.Shaders.Shader vs = new SharpGL.Shaders.Shader();
+            SharpGL.Shaders.Shader fs = new SharpGL.Shaders.Shader();
 
             vs.Create(gl, OpenGL.GL_VERTEX_SHADER, vertsorce);
             fs.Create(gl, OpenGL.GL_FRAGMENT_SHADER, fragsorce);
@@ -59,13 +59,13 @@ namespace PseudoGameEngine.graphics
             if (vs.GetCompileStatus(gl) == false)
             {
                 vs.Delete(gl);
-                throw (new initializing_vertex_Shader("Failed to Compile Vertex Shader"));               
+                throw (new Initializing_Vertex_Shader("Failed to Compile Vertex Shader"));               
             }
 
             if (fs.GetCompileStatus(gl) == false)
             {
                 fs.Delete(gl);
-                throw (new initializing_fragment_Shader("Failed to Compile fragment Shader"));
+                throw (new Initializing_Fragment_Shader("Failed to Compile fragment Shader"));
             }
             uint shaderProgramObject = gl.CreateProgram();
             gl.AttachShader(shaderProgramObject, vs.ShaderObject);
@@ -126,22 +126,22 @@ namespace PseudoGameEngine.graphics
 
         }
         
-        public void delete()
+        public void Delete()
         {
-            gl.DeleteProgram(m_shaderID);
+            gl.DeleteProgram(_shaderID);
         }
-        ~shader()
+        ~Shader()
         {
-            delete();
+            Delete();
         }
 
-        public void enable()
+        public void Enable()
         {
             //enable shaders           
-            gl.UseProgram(m_shaderID);
+            gl.UseProgram(_shaderID);
         }
 
-        public void disable()
+        public void Disable()
         {
             //disable shaders
             gl.UseProgram(0);
@@ -149,7 +149,7 @@ namespace PseudoGameEngine.graphics
         
         Int32 GetUniformLoacation(string name)
         {
-            return gl.GetUniformLocation(m_shaderID, name);
+            return gl.GetUniformLocation(_shaderID, name);
         }
 
         public void SetUnifrom(string name, float val)

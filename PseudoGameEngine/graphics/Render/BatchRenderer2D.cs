@@ -1,9 +1,9 @@
 ﻿using SharpGL;
 using System;
 using System.Runtime.InteropServices;
-using PseudoGameEngine.math;
+using PseudoGameEngine.Math;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
     public class BatchRenderer2D : Renderer2D
     {
@@ -25,7 +25,7 @@ namespace PseudoGameEngine.graphics
 
         private uint[] _VAO = new uint[2];
         private uint _VBO;
-        private indexbuffer _indexbuffer;
+        private IndexBuffer _indexbuffer;
         private int _IndexCount;
         //private VertexData[] _Buffer = new VertexData[4];
         //private IntPtr mapbuffer;
@@ -78,12 +78,12 @@ namespace PseudoGameEngine.graphics
                 offset += 4;
             }
 
-            _indexbuffer = new indexbuffer(indices, (uint)RENDERER_INDICES_SIZE);
+            _indexbuffer = new IndexBuffer(indices, (uint)RENDERER_INDICES_SIZE);
 
             gl.BindVertexArray(0);
         }
 
-        public override void begin()
+        public override void Begin()
         {
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, _VBO);
            
@@ -95,7 +95,7 @@ namespace PseudoGameEngine.graphics
         }
 
 
-        public override void submit(Renderable2d renderable)
+        public override void Submit(Renderable2D renderable)
         {
             Vector3 position = renderable.GetPosition();
             Vector2 size = renderable.GetSize();
@@ -137,49 +137,49 @@ namespace PseudoGameEngine.graphics
 
             //float c = Float.intBitsToFloat((r << 0) | (g << 8) | (b << 16) | (a << 24));
 
-            //m_Buffer.put(position.x).put(position.y).put(position.z);
-            //m_Buffer.put(uv.get(0).x).put(uv.get(0).y);
-            //m_Buffer.put(c);
+            //_Buffer.put(position.x).put(position.y).put(position.z);
+            //_Buffer.put(uv.get(0).x).put(uv.get(0).y);
+            //_Buffer.put(c);
 
-            //m_Buffer.put(position.x).put(position.y + size.y).put(position.z);
-            //m_Buffer.put(uv.get(1).x).put(uv.get(1).y);
-            //m_Buffer.put(c);
+            //_Buffer.put(position.x).put(position.y + size.y).put(position.z);
+            //_Buffer.put(uv.get(1).x).put(uv.get(1).y);
+            //_Buffer.put(c);
 
-            //m_Buffer.put(position.x + size.x).put(position.y + size.y).put(position.z);
-            //m_Buffer.put(uv.get(2).x).put(uv.get(2).y);
-            //m_Buffer.put(c);
+            //_Buffer.put(position.x + size.x).put(position.y + size.y).put(position.z);
+            //_Buffer.put(uv.get(2).x).put(uv.get(2).y);
+            //_Buffer.put(c);
 
-            //m_Buffer.put(position.x + size.x).put(position.y).put(position.z);
-            //m_Buffer.put(uv.get(3).x).put(uv.get(3).y);
-            //m_Buffer.put(c);
+            //_Buffer.put(position.x + size.x).put(position.y).put(position.z);
+            //_Buffer.put(uv.get(3).x).put(uv.get(3).y);
+            //_Buffer.put(c);
 
-            //m_IndexCount += 6;
+            //_IndexCount += 6;
         }
 
 
-        public override void end()
+        public override void End()
         {
             gl.UnmapBuffer(OpenGL.GL_ARRAY_BUFFER);
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
         }
 
 
-        public override void flush()
+        public override void Flush()
         {
             gl.BindVertexArray(_VAO[0]);
-            _indexbuffer.bind();
+            _indexbuffer.Bind();
 
             gl.DrawElements(OpenGL.GL_TRIANGLES, _IndexCount, OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
 
-            _indexbuffer.unbind();
+            _indexbuffer.Unbind();
             gl.BindVertexArray(0);
 
             _IndexCount = 0;
         }
 
-        public override void delete()
+        public override void Delete()
         {
-            _indexbuffer.delete();
+            _indexbuffer.Delete();
             uint[] vbo = { _VBO, 0 };
             gl.DeleteBuffers(0, vbo);
         }

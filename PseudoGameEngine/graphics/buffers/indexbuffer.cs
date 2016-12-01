@@ -1,15 +1,15 @@
 ﻿using SharpGL;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
-    public class indexbuffer
+    public class IndexBuffer
     {
         SharpGL.VertexBuffers.IndexBuffer _indexbuffer;
 
         uint Count;
         OpenGL gl = new OpenGL();      
 
-        public indexbuffer(ushort[] data,  uint Count)
+        public IndexBuffer(ushort[] data,  uint Count)
         {
             _indexbuffer = new SharpGL.VertexBuffers.IndexBuffer();
             this.Count = Count;
@@ -19,7 +19,7 @@ namespace PseudoGameEngine.graphics
             _indexbuffer.Unbind(gl);           
            
         }
-        public indexbuffer(int[] data, int Count)
+        public IndexBuffer(int[] data, int Count)
         {
             _indexbuffer = new SharpGL.VertexBuffers.IndexBuffer();
             this.Count = (uint)Count;
@@ -30,12 +30,12 @@ namespace PseudoGameEngine.graphics
 
         }
 
-        public void bind()
+        public void Bind()
         {
             _indexbuffer.Bind(gl);
         }
 
-        public void unbind()
+        public void Unbind()
         {
             _indexbuffer.Unbind(gl);
         }
@@ -43,16 +43,16 @@ namespace PseudoGameEngine.graphics
         {
             return this.Count;
         }
-        public void delete()
+        public void Delete()
         {
             uint[] a = new uint[2];
             a[0] = _indexbuffer.IndexBufferObject;
             gl.DeleteBuffers(0, a);
         }
 
-        //~indexbuffer()
-        //{
-        //    delete();
-        //}
+        ~IndexBuffer()
+        { 
+           Delete();
+        }
     }
 }

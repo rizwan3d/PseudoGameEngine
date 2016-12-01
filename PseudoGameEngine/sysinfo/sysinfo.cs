@@ -2,7 +2,7 @@
 
 namespace PseudoGameEngine
 {
-    static public class sysinfo
+    static public class Sysinfo
     {
         static OpenGL gl = new OpenGL();
         static public string OpenGLVersion()

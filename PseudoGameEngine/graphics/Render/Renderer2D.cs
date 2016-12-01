@@ -1,13 +1,13 @@
-﻿using PseudoGameEngine.graphics;
+﻿using PseudoGameEngine.Graphics;
 
-namespace PseudoGameEngine.graphics
+namespace PseudoGameEngine.Graphics
 {
     public  class Renderer2D
     {
-        public virtual  void begin() { }
-        public virtual void end() { }
-        public virtual void submit(Renderable2d Renderable) { }
-        public virtual void delete() { }
-        public virtual void flush() { }
+        public virtual  void Begin() { }
+        public virtual void End() { }
+        public virtual void Submit(Renderable2D Renderable) { }
+        public virtual void Delete() { }
+        public virtual void Flush() { }
     }
 }

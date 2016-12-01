@@ -30,7 +30,7 @@ using System;
 using System.Runtime.Serialization;
 #endif
 
-namespace PseudoGameEngine.math
+namespace PseudoGameEngine.Math
 {
 #if WINRT
     [DataContract]
