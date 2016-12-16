@@ -6,7 +6,7 @@ namespace PseudoGameEngine.Graphics
     {
         SharpGL.VertexBuffers.IndexBuffer _indexbuffer;
 
-        uint Count;
+        public uint Count { get; }
         OpenGL gl = new OpenGL();      
 
         public IndexBuffer(ushort[] data,  uint Count)
@@ -38,10 +38,6 @@ namespace PseudoGameEngine.Graphics
         public void Unbind()
         {
             _indexbuffer.Unbind(gl);
-        }
-        public uint GetCount()
-        {
-            return this.Count;
         }
         public void Delete()
         {

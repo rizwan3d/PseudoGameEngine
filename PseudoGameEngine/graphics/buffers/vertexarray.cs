@@ -26,7 +26,7 @@ namespace PseudoGameEngine.Graphics
             _buffer.Bind();
 
             gl.EnableVertexAttribArray(index);
-            gl.VertexAttribPointer(index, (int)_buffer.GetComponentCount(), OpenGL.GL_FLOAT, false, 0, IntPtr.Zero);
+            gl.VertexAttribPointer(index, (int)_buffer.ComponentCount, OpenGL.GL_FLOAT, false, 0, IntPtr.Zero);
 
             _buffer.Unbind();
             Unbind();

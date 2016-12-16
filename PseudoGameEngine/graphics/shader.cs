@@ -146,39 +146,36 @@ namespace PseudoGameEngine.Graphics
             //disable shaders
             gl.UseProgram(0);
         }
-        
-        Int32 GetUniformLoacation(string name)
+
+        Int32 UniformLoacation(string name)
         {
             return gl.GetUniformLocation(_shaderID, name);
         }
 
-        public void SetUnifrom(string name, float val)
+        public void Unifrom(string name, float val)
         {
-            gl.Uniform1(GetUniformLoacation(name), val);
+            gl.Uniform1(UniformLoacation(name), val);
         }
-        public void SetUniform(string name, int val)
+        public void Uniform(string name, int val)
         {
-            gl.Uniform1(GetUniformLoacation(name), val);
+            gl.Uniform1(UniformLoacation(name), val);
         }
-        public void SetUniform(string name, Vector2 val)
+        public void Uniform(string name, Vector2 val)
         {
-            gl.Uniform2(GetUniformLoacation(name), (float)val.X, (float)val.Y);
+            gl.Uniform2(UniformLoacation(name), (float)val.X, (float)val.Y);
         }
-        public void SetUniform(string name, Vector3 val)
+        public void Uniform(string name, Vector3 val)
         {
-            gl.Uniform3(GetUniformLoacation(name), (float)val.X, (float)val.Y, (float)val.Z);
+            gl.Uniform3(UniformLoacation(name), (float)val.X, (float)val.Y, (float)val.Z);
             
         }
-        public void SetUniform(string name, Vector4 val)
+        public void Uniform(string name, Vector4 val)
         {
-            gl.Uniform4(GetUniformLoacation(name), (float)val.W, (float)val.X, (float)val.Y, (float)val.Z);
+            gl.Uniform4(UniformLoacation(name), (float)val.W, (float)val.X, (float)val.Y, (float)val.Z);
         }
-        public void SetUniformMatrix(string name, Matrix mat)
+        public void Uniform(string name, Matrix mat)
         {
-            gl.UniformMatrix4(GetUniformLoacation(name), 1, false, mat.toFloat());
+            gl.UniformMatrix4(UniformLoacation(name), 1, false, mat.toFloat());
         }
-
-
-
     }
 }

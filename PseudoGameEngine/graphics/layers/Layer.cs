@@ -17,7 +17,7 @@ namespace PseudoGameEngine.Graphics
             _ProjectionMatrix = projectionMatrix;
             
             _Shader.Enable();
-            _Shader.SetUniformMatrix("pr_matrix", _ProjectionMatrix);
+            _Shader.Uniform("pr_matrix", _ProjectionMatrix);
             _Shader.Disable();
         }
 

@@ -28,10 +28,10 @@ namespace PseudoGameEngine_Test
         {
              Window window = new Window("Text", 960, 540, false);
 
-                Debue.Log("Vendor " + Sysinfo.Vendor());
-                Debue.Error("Render " + Sysinfo.Render());
-                Debue.Warning("OpenGLVersion "+ Sysinfo.OpenGLVersion());
-                Debue.Log("ShadingLanguageVersion " + Sysinfo.ShadingLanguageVersion());
+                Debue.Log("Vendor " + Sysinfo.Vendor);
+                Debue.Error("Render " + Sysinfo.Render);
+                Debue.Warning("OpenGLVersion "+ Sysinfo.OpenGLVersion);
+                Debue.Log("ShadingLanguageVersion " + Sysinfo.ShadingLanguageVersion);
 
                 s = new Shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
             s2 = new Shader("../../shaders/minimal.vert", "../../shaders/minimal.frag");
@@ -40,8 +40,8 @@ namespace PseudoGameEngine_Test
             s.Enable();
             s2.Enable();
             //s3.enable();            
-            s.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
-            s2.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
+            s.Uniform("light_pos", new Vector2(4.0f, 1.5f));
+            s2.Uniform("light_pos", new Vector2(4.0f, 1.5f));
             //s3.SetUniform("light_pos", new Vector2(4.0f, 1.5f));
             
 
@@ -87,9 +87,9 @@ namespace PseudoGameEngine_Test
             sender.ClearColor(new Vector4(0, 0, 0, 0));
 
             s.Enable();
-            s.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
+            s.Uniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
             s2.Enable();
-            s2.SetUniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
+            s2.Uniform("light_pos", new Vector2(x * 32.0f / 960.0f - 16.0f, 9.0f - y * 18.0f / 540.0f));
             
             layer.Render();
             layer2.Render();

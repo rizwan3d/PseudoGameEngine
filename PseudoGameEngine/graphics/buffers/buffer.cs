@@ -5,7 +5,7 @@ namespace PseudoGameEngine.Graphics
     public class Buffer
     {
         uint[] bufferID;
-        uint ComponentCount;
+        public uint ComponentCount { get; }
 
         OpenGL gl = new OpenGL();
         
@@ -33,11 +33,7 @@ namespace PseudoGameEngine.Graphics
         {
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
         }
-        public uint GetComponentCount()
-        {
-            return this.ComponentCount;
-        }
-
+        
         public void Delete() {
             gl.DeleteBuffers(0,bufferID);
         }

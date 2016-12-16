@@ -37,14 +37,14 @@ namespace PseudoGameEngine.Graphics
             //foreach(StaticSprite sprite in _RedererQueue) { 
                 StaticSprite sprite = _RedererQueue.First();
 
-                sprite.GetVertexArray().Bind();
-                sprite.GetIndexBuffer().Bind();
+                sprite.VertexArray.Bind();
+                sprite.IndexBuffer.Bind();
 
-                sprite.GetShader().SetUniformMatrix("ml_matrix", Matrix.CreateTranslation(sprite.GetPosition()));
-                gl.DrawElements(OpenGL.GL_TRIANGLES, (int)sprite.GetIndexBuffer().GetCount(), OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
+                sprite.Shader.Uniform("ml_matrix", Matrix.CreateTranslation(sprite.GetPosition()));
+                gl.DrawElements(OpenGL.GL_TRIANGLES, (int)sprite.IndexBuffer.Count, OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
 
-                sprite.GetIndexBuffer().Unbind();
-                sprite.GetVertexArray().Unbind();
+                sprite.IndexBuffer.Unbind();
+                sprite.VertexArray.Unbind();
 
                 _RedererQueue.Dequeue();
 
